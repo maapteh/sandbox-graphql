@@ -1,0 +1,45 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "attach",
+            "name": "Next inspector",
+            "protocol": "inspector",
+            "port": 9229,
+            "restart": true,
+            "localRoot": "${workspaceRoot}",
+            "remoteRoot": "."
+        },
+        {
+            "name": "Debug Tests: client",
+            "type": "node",
+            "request": "launch",
+            "args": [
+                "--inspect-brk",
+                "${workspaceRoot}/node_modules/.bin/jest",
+                "--config=${workspaceRoot}/jest-client.config.js",
+                "--runInBand",
+                "--watch",
+                "false"
+            ],
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen"
+        },
+        {
+            "name": "Debug Tests: server",
+            "type": "node",
+            "request": "launch",
+            "args": [
+                "--inspect-brk",
+                "${workspaceRoot}/node_modules/.bin/jest",
+                "--config=${workspaceRoot}/jest-server.config.js",
+                "--runInBand",
+                "--watch",
+                "false"
+            ],
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen"
+        }
+    ]
+}

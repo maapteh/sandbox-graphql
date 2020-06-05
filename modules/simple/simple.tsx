@@ -1,6 +1,7 @@
+import React from 'react';
 import styled from 'styled-components';
 import { Plain } from '../../components/plain/plain';
-import { useSimpleQuery } from '../../codegen/generated/_graphql';
+import { useSimpleQuery } from '../../codegen/_graphql';
 
 const TitleSimple = styled.h1`
     color: #00ade6;

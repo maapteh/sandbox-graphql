@@ -1,2 +1,15 @@
 .next
 node_modules
+
+coverage
+
+*.log
+.npm
+npm-debug.log*
+# we are yarn repo now
+package-lock.json
+
+.flamegraphs
+
+yarn-debug.log*
+yarn-error.log*
