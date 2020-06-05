@@ -3,7 +3,7 @@ schema:
     - './pages/api/graphql/schema.ts'
 documents: 'modules/**/*.graphql'
 generates:
-    codegen/generated/_graphql.tsx:
+    codegen/_graphql.tsx:
         plugins:
             - 'typescript'
             - 'typescript-operations'
@@ -13,6 +13,6 @@ generates:
             withHooks: true
             hooksImportFrom: '@apollo/react-hooks'
             avoidOptionals: true
-    codegen/generated/_schema.graphql:
+    _schema.graphql:
         plugins:
             - schema-ast
