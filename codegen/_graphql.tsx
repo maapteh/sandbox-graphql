@@ -121,11 +121,11 @@ export type ResolversParentTypes = {
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
-  simple: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  simple?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
 };
 
 export type Resolvers<ContextType = any> = {
-  Query: QueryResolvers<ContextType>;
+  Query?: QueryResolvers<ContextType>;
 };
 
 

@@ -1,12 +1,10 @@
-import { QueryResolvers } from '../../../codegen/_graphql';
+import { Resolvers } from '../../../codegen/_graphql';
 
-const query: QueryResolvers = {
-    simple: () => {
-        console.log('[server] GraphQL server query: simple');
-        return 'Welcome to the AH GraphQL workshop';
+export const resolvers: Resolvers = {
+    Query: {
+        simple: () => {
+            console.log('[server] GraphQL server query: simple');
+            return 'Welcome to the AH GraphQL workshop';
+        },
     },
-};
-
-export const resolvers: any = {
-    Query: query,
 };
