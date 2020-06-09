@@ -13,7 +13,7 @@ type Props = {
 };
 
 export const Simple = ({ ssr = true }: Props) => {
-    console.log('[client] render good');
+    console.log('[client] render simple');
     const { data } = useSimpleQuery({
         ssr,
     });
