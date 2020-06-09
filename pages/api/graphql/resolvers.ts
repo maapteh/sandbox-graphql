@@ -1,10 +1,16 @@
-import { Resolvers } from '../../../codegen/_graphql';
+import { QueryResolvers } from '../../../codegen/_graphql';
+import { createListService } from './__mocks__/lists';
 
-export const resolvers: Resolvers = {
-    Query: {
-        simple: () => {
-            console.log('[server] GraphQL server query: simple');
-            return 'Welcome to the AH GraphQL workshop';
-        },
+const listService = createListService();
+
+const query: QueryResolvers = {
+    simple: () => {
+        console.log('[server] GraphQL server query: simple');
+        return 'Welcome to the AH GraphQL workshop';
     },
+    lists: () => listService.all(),
+};
+
+export const resolvers: any = {
+    Query: query,
 };
