@@ -16,4 +16,5 @@ generates:
             avoidOptionals: true
     _schema.graphql:
         plugins:
+            - add: '""" AUTO GENERATED FOR EDITOR, DO NOT EDIT """'
             - schema-ast
