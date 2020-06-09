@@ -6,5 +6,24 @@ export const typeDefs = gql`
         Have a simple example
         """
         simple: String
+
+        """
+        Get all the favorite lists this user has made
+        """
+        lists: [List!]
+    }
+
+    """
+    Favorite list
+    """
+    type List {
+        """
+        Id of list
+        """
+        id: Int!
+        """
+        User defined description
+        """
+        description: String!
     }
 `;

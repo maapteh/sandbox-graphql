@@ -1,6 +1,18 @@
 """ AUTO GENERATED FOR EDITOR, DO NOT EDIT """
 
+"""Favorite list"""
+type List {
+  """Id of list"""
+  id: Int!
+
+  """User defined description"""
+  description: String!
+}
+
 type Query {
   """Have a simple example"""
   simple: String
+
+  """Get all the favorite lists this user has made"""
+  lists: [List!]
 }
