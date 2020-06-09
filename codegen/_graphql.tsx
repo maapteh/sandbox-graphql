@@ -16,10 +16,18 @@ export type Scalars = {
   Float: number;
 };
 
+export type List = {
+  __typename?: 'List';
+  id: Scalars['Int'];
+  description: Scalars['String'];
+};
+
 export type Query = {
   __typename?: 'Query';
   /** Have a simple example */
   simple: Maybe<Scalars['String']>;
+  /** Get all the favorite lists this user has made */
+  lists: Maybe<Array<List>>;
 };
 
 export type SimpleQueryVariables = {};
@@ -110,6 +118,8 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 export type ResolversTypes = {
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']>;
+  List: ResolverTypeWrapper<List>;
+  Int: ResolverTypeWrapper<Scalars['Int']>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
 };
 
@@ -117,14 +127,24 @@ export type ResolversTypes = {
 export type ResolversParentTypes = {
   Query: {};
   String: Scalars['String'];
+  List: List;
+  Int: Scalars['Int'];
   Boolean: Scalars['Boolean'];
+};
+
+export type ListResolvers<ContextType = any, ParentType extends ResolversParentTypes['List'] = ResolversParentTypes['List']> = {
+  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   simple?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  lists?: Resolver<Maybe<Array<ResolversTypes['List']>>, ParentType, ContextType>;
 };
 
 export type Resolvers<ContextType = any> = {
+  List?: ListResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
 };
 
