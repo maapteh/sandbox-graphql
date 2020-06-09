@@ -4,7 +4,8 @@
 
 ## Pre-requisites
 
--   `yarn`
+-   `yarn`, with node10 or node12
+-   [vscode apollo plugin](https://marketplace.visualstudio.com/items?itemName=apollographql.vscode-apollo) [optional]
 
 ## File structure
 
