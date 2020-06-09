@@ -7,7 +7,8 @@ generates:
         plugins:
             - 'typescript'
             - 'typescript-operations'
-            - 'typescript-resolvers'
+            - 'typescript-resolvers':
+                  avoidOptionals: false
             - 'typescript-react-apollo'
         config:
             withHooks: true
