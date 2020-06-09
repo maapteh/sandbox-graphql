@@ -30,6 +30,17 @@ export type Query = {
   lists: Maybe<Array<List>>;
 };
 
+export type ListsQueryVariables = {};
+
+
+export type ListsQuery = (
+  { __typename?: 'Query' }
+  & { lists: Maybe<Array<(
+    { __typename?: 'List' }
+    & Pick<List, 'id' | 'description'>
+  )>> }
+);
+
 export type SimpleQueryVariables = {};
 
 
@@ -133,19 +144,19 @@ export type ResolversParentTypes = {
 };
 
 export type ListResolvers<ContextType = any, ParentType extends ResolversParentTypes['List'] = ResolversParentTypes['List']> = {
-  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  id: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  description: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
-  simple?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  lists?: Resolver<Maybe<Array<ResolversTypes['List']>>, ParentType, ContextType>;
+  simple: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  lists: Resolver<Maybe<Array<ResolversTypes['List']>>, ParentType, ContextType>;
 };
 
 export type Resolvers<ContextType = any> = {
-  List?: ListResolvers<ContextType>;
-  Query?: QueryResolvers<ContextType>;
+  List: ListResolvers<ContextType>;
+  Query: QueryResolvers<ContextType>;
 };
 
 
@@ -156,6 +167,58 @@ export type Resolvers<ContextType = any> = {
 export type IResolvers<ContextType = any> = Resolvers<ContextType>;
 
 
+export const ListsDocument = gql`
+    query lists {
+  lists {
+    id
+    description
+  }
+}
+    `;
+export type ListsComponentProps = Omit<ApolloReactComponents.QueryComponentOptions<ListsQuery, ListsQueryVariables>, 'query'>;
+
+    export const ListsComponent = (props: ListsComponentProps) => (
+      <ApolloReactComponents.Query<ListsQuery, ListsQueryVariables> query={ListsDocument} {...props} />
+    );
+    
+export type ListsProps<TChildProps = {}, TDataName extends string = 'data'> = {
+      [key in TDataName]: ApolloReactHoc.DataValue<ListsQuery, ListsQueryVariables>
+    } & TChildProps;
+export function withLists<TProps, TChildProps = {}, TDataName extends string = 'data'>(operationOptions?: ApolloReactHoc.OperationOption<
+  TProps,
+  ListsQuery,
+  ListsQueryVariables,
+  ListsProps<TChildProps, TDataName>>) {
+    return ApolloReactHoc.withQuery<TProps, ListsQuery, ListsQueryVariables, ListsProps<TChildProps, TDataName>>(ListsDocument, {
+      alias: 'lists',
+      ...operationOptions
+    });
+};
+
+/**
+ * __useListsQuery__
+ *
+ * To run a query within a React component, call `useListsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useListsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useListsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useListsQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<ListsQuery, ListsQueryVariables>) {
+        return ApolloReactHooks.useQuery<ListsQuery, ListsQueryVariables>(ListsDocument, baseOptions);
+      }
+export function useListsLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<ListsQuery, ListsQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<ListsQuery, ListsQueryVariables>(ListsDocument, baseOptions);
+        }
+export type ListsQueryHookResult = ReturnType<typeof useListsQuery>;
+export type ListsLazyQueryHookResult = ReturnType<typeof useListsLazyQuery>;
+export type ListsQueryResult = ApolloReactCommon.QueryResult<ListsQuery, ListsQueryVariables>;
 export const SimpleDocument = gql`
     query simple {
   simple
