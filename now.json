@@ -1,5 +1,5 @@
 {
-  "name": "mpthSample",
-  "version": 2,
-  "regions": ["all"]
+    "name": "sandboxWorkshop",
+    "version": 2,
+    "regions": ["all"]
 }
