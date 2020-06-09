@@ -62,7 +62,7 @@
         "start": "NODE_ENV=production next start",
         "next": "next dev",
         "next:inspect": "NODE_OPTIONS='--inspect' next dev",
-        "test": "test:server && test:client",
+        "test": "yarn test:server && yarn test:client",
         "test:server": "jest ./pages/api/graphql/** --config=jest-server.config.js",
         "test:client": "jest {./modules/**,./components/**} --config=jest-client.config.js",
         "---- auto tooling ----": "-------------------------",
