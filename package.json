@@ -68,7 +68,10 @@
         "---- auto tooling ----": "-------------------------",
         "codegen": "graphql-codegen --config codegen.yml",
         "prettier": "prettier \"{pages,lib,modules,components}/**/*.{ts,tsx}\" --write",
-        "schema:diff": "yarn codegen && graphql-inspector diff git:origin/master:_schema.graphql _schema.graphql",
+        "schema:diff": "yarn codegen && graphql-inspector diff git:origin/master:_schema.graphql _schema.graphql --rule suppressRemovalOfDeprecatedField",
+        "schema:documents": "graphql-inspector validate './modules/**/*.graphql' _schema.graphql",
+        "schema:coverage": "graphql-inspector coverage './modules/**/*.graphql' _schema.graphql",
+        "schema:similar": "graphql-inspector similar _schema.graphql",
         "schema:linter": "graphql-schema-linter",
         "update": "yarn upgrade-interactive --latest"
     },
