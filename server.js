@@ -10,8 +10,8 @@ const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
-let CERT = 'localhost.crt';
-let KEY = 'localhost.key';
+let CERT = './internals/localhost.crt';
+let KEY = './internals/localhost.key';
 
 const privateKey = fs.readFileSync(KEY, 'utf8');
 const certificate = fs.readFileSync(CERT, 'utf8');
