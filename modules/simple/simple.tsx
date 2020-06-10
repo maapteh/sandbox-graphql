@@ -21,7 +21,7 @@ export const Simple = ({ ssr = true }: Props) => {
     return (
         <Plain>
             <TitleSimple>Simple</TitleSimple>
-            <p>{data && data.simple}</p>
+            <p>{data?.simple}</p>
         </Plain>
     );
 };
