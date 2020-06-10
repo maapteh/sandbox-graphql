@@ -5,7 +5,7 @@
 ## Pre-requisites
 
 -   `yarn`, with node10 or node12
--   [vscode apollo plugin](https://marketplace.visualstudio.com/items?itemName=apollographql.vscode-apollo) [optional]
+-   [vscode prisma graphql plugin](https://marketplace.visualstudio.com/items?itemName=Prisma.vscode-graphql) (optional)
 
 ## File structure
 
