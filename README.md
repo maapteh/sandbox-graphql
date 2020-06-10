@@ -18,3 +18,7 @@
 
 -   `yarn dev`, after it runs in other proces run `yarn test:watch`
 -   goto [http://localhost:3000/](http://localhost:3000/) (playground at [http://localhost:3000/api/graphql](http://localhost:3000/api/graphql))
+
+## Workshop
+
+[here](./internals/wiki/index.md)
