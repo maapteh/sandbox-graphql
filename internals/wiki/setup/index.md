@@ -9,7 +9,7 @@ You will also find the schema (interfaces) and resolvers (services). In these th
 
 ## Client
 
-We have our frontend application in these locations [../../../pages/index](/pages/index.tsx) (page) and [/modules](../../../modules) (modules/features). For the client we use [Apollo](../../../lib/apollo.tsx), see 'createApolloClient' for its configuration.
+We have our frontend application in these locations [pages/index](../../../pages/index.tsx) (page) and [/modules](../../../modules) (modules/features). For the client we use [Apollo](../../../lib/apollo.tsx), see 'createApolloClient' for its configuration.
 
 When creating a feature be sure to have a '\*.graphql' file where you defined what you need (query/mutation). When you added that need the [autogen](####-Codegen) will create react hooks for you automatically. So you can start with your component.
 Be sure to pace the component on the page, to actually see it :)
