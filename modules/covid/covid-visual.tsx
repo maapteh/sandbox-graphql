@@ -39,13 +39,13 @@ export const CovidVisual = () => {
                         return {
                             name: date,
                             death: item.deaths[n],
-                            recovered: item.cases[n],
+                            cases: item.cases[n],
                         };
                     });
 
                     return (
                         <p>
-                            <strong>{item.province || 'no province'}</strong>
+                            <strong>{item.province || country}</strong>
                             <BarChart
                                 width={500}
                                 height={300}
@@ -62,7 +62,7 @@ export const CovidVisual = () => {
                                 <Tooltip />
                                 <Legend />
                                 <Bar dataKey="death" fill="#8884d8" />
-                                <Bar dataKey="recovered" fill="#82ca9d" />
+                                <Bar dataKey="cases" fill="#82ca9d" />
                             </BarChart>
                         </p>
                     );

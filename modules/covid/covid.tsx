@@ -30,7 +30,7 @@ export const Covid = ({ ssr = true }: Props) => {
     // feel free to plot it in any graph you like, this is a simple example
     return (
         <Plain>
-            <TitleSimple>Covid</TitleSimple>
+            <TitleSimple>Covid-19</TitleSimple>
             <p>
                 {results.map((item, i) => {
                     return (
