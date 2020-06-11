@@ -24,11 +24,11 @@ and this query returns data, error loading etc. Also you will be able to add var
 
 So from your editor you will see all options it returns:
 
-![](./hooks-1.png){width=250px}
+![](./hooks-1.png | width=300)
 
 and the options you can provide:
 
-![](./hooks-2.png)
+![](./hooks-2.png | width=300))
 
 ## Editor plugin
 
