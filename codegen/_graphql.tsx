@@ -33,11 +33,11 @@ export type CovidTimelineCountry = {
   country: Scalars['String'];
   /** Province */
   province: Maybe<Scalars['String']>;
-  /** Known amount of Covid cases */
+  /** Known total amount of Covid cases */
   cases: Array<Scalars['Int']>;
-  /** Known amount of Covid deaths */
+  /** Known total amount of Covid deaths */
   deaths: Array<Scalars['Int']>;
-  /** Known amount of Covid reciveries */
+  /** Known total amount of Covid reciveries */
   recovered: Array<Scalars['Int']>;
 };
 
@@ -52,6 +52,7 @@ export type Query = {
 
 export type QueryCovidHistoricalArgs = {
   days: Maybe<Scalars['Int']>;
+  country: Maybe<Scalars['String']>;
 };
 
 export type SimpleQueryVariables = {};

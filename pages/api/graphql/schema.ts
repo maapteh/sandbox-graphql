@@ -15,6 +15,10 @@ export const typeDefs = gql`
             Amount of days in the past, till now
             """
             days: Int
+            """
+            Specific country you are interested in, for example "**Netherlands**"
+            """
+            country: String
         ): CovidHistorical
     }
 
@@ -45,15 +49,15 @@ export const typeDefs = gql`
         """
         province: String
         """
-        Known amount of Covid cases
+        Known total amount of Covid cases
         """
         cases: [Int!]!
         """
-        Known amount of Covid deaths
+        Known total amount of Covid deaths
         """
         deaths: [Int!]!
         """
-        Known amount of Covid reciveries
+        Known total amount of Covid reciveries
         """
         recovered: [Int!]!
     }

@@ -8,7 +8,7 @@ export const resolvers: Resolvers = {
             return 'Welcome to the AH GraphQL workshop';
         },
 
-        covidHistorical: async (_, { days = 10 }) => {
+        covidHistorical: async (_, { days = 10, country }) => {
             const response = await fetch(
                 `https://disease.sh/v2/historical?lastdays=${days}`,
             );
@@ -26,15 +26,21 @@ export const resolvers: Resolvers = {
             // We can't use auto typing and wont type ourselves until service fixes this!
             const dates = Object.keys(data[0].timeline.cases);
 
-            const results = data.map((item: any) => {
-                return {
-                    country: item.country,
-                    province: item.province,
-                    cases: Object.values(item.timeline.cases),
-                    deaths: Object.values(item.timeline.deaths),
-                    recovered: Object.values(item.timeline.recovered),
-                };
-            });
+            const results = data
+                .map((item: any) => {
+                    if (country && item.country !== country) {
+                        return null;
+                    }
+
+                    return {
+                        country: item.country,
+                        province: item.province,
+                        cases: Object.values(item.timeline.cases),
+                        deaths: Object.values(item.timeline.deaths),
+                        recovered: Object.values(item.timeline.recovered),
+                    };
+                })
+                .filter(Boolean);
 
             return {
                 dates,
