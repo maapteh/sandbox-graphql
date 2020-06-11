@@ -24,21 +24,23 @@ and this query returns data, error loading etc. Also you will be able to add var
 
 So from your editor you will see all options it returns:
 
-![](./hooks-1.png | width=300)
+<img src="./hooks-1.png" width="400px" />
 
 and the options you can provide:
 
-![](./hooks-2.png | width=300))
+<img src="./hooks-2.png" width="400px" />
 
 ## Editor plugin
 
 [vscode prisma graphql plugin](https://marketplace.visualstudio.com/items?itemName=Prisma.vscode-graphql) gives autocomplete on queries and shows the documentation inline. You dont need to go to the playground. All GraphQL usage can be done from the editor!
 
 available queries, with documentation:
-![](./editor-plugin-2.png)
+
+<img src="./editor-plugin-2.png" width="400px" />
 
 autotyping on data need:
-![](./editor-plugin-1.png)
+
+<img src="./editor-plugin-1.png" width="400px" />
 
 ## Tooling
 
@@ -53,7 +55,8 @@ We use some tooling provided by [The Guild](https://medium.com/the-guild)
 During development this runs in autowatch mode.
 
 `yarn codegen`
-![](./codegen.png)
+
+<img src="./codegen.png" width="400px" />
 
 This auto generates all our TypeScript types: used documents, interfaces, (lazy)hooks and resolvers.
 
@@ -97,13 +100,17 @@ In the client it then gives autotyping of all data you requested. You heave your
 > For schema utilities we are using [graphql-inspector](https://graphql-inspector.com/). We also use this centralised in Github as action. Besides your editor giving feedback you can also run these npm commands:
 
 `yarn schema:diff`: it detects breaking changes in the schema
-![](./schema-changes.png)
+
+<img src="./schema-changes.png" width="400px" />
 
 `yarn schema:linter`: are you changes according to the basic rules?
-![](./schema-linter.png)
+
+<img src="./schema-linter.png" width="400px" />
 
 `yarn schema:validation`: is schema usage valid?
-![](./schema-validation.png)
+
+<img src="./schema-validation.png" width="400px" />
 
 `yarn schema:coverage`: what of the total schema is your application using
-![](./schema-coverage.png)
+
+<img src="./schema-coverage.png" width="200px" />
