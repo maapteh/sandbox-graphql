@@ -14,6 +14,3 @@ generates:
             withHooks: true
             hooksImportFrom: '@apollo/react-hooks'
             avoidOptionals: true
-    _schema.graphql:
-        plugins:
-            - schema-ast
