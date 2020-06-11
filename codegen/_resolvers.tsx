@@ -1,5 +1,6 @@
 import { GraphQLResolveInfo } from 'graphql';
 export type Maybe<T> = T | null;
+export type RequireFields<T, K extends keyof T> = { [X in Exclude<keyof T, K>]?: T[X] } & { [P in K]-?: NonNullable<T[P]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -9,10 +10,42 @@ export type Scalars = {
   Float: number;
 };
 
+/** Historical Covid data for countries */
+export type CovidHistorical = {
+  __typename?: 'CovidHistorical';
+  /** The last ten days */
+  dates: Array<Scalars['String']>;
+  /** The Covid results for the countries */
+  results: Array<CovidTimelineCountry>;
+};
+
+/** Covid results per country showing cases, deaths and recoverd */
+export type CovidTimelineCountry = {
+  __typename?: 'CovidTimelineCountry';
+  /** Country name */
+  country: Scalars['String'];
+  /** Province */
+  province?: Maybe<Scalars['String']>;
+  /** Known total amount of Covid cases */
+  cases: Array<Scalars['Int']>;
+  /** Known total amount of Covid deaths */
+  deaths: Array<Scalars['Int']>;
+  /** Known total amount of Covid reciveries */
+  recovered: Array<Scalars['Int']>;
+};
+
 export type Query = {
   __typename?: 'Query';
   /** Have a simple example */
   simple?: Maybe<Scalars['String']>;
+  /** Get historical data of all countries */
+  covidHistorical?: Maybe<CovidHistorical>;
+};
+
+
+export type QueryCovidHistoricalArgs = {
+  days?: Maybe<Scalars['Int']>;
+  country?: Maybe<Scalars['String']>;
 };
 
 
@@ -95,6 +128,9 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 export type ResolversTypes = {
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']>;
+  Int: ResolverTypeWrapper<Scalars['Int']>;
+  CovidHistorical: ResolverTypeWrapper<CovidHistorical>;
+  CovidTimelineCountry: ResolverTypeWrapper<CovidTimelineCountry>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
 };
 
@@ -102,14 +138,35 @@ export type ResolversTypes = {
 export type ResolversParentTypes = {
   Query: {};
   String: Scalars['String'];
+  Int: Scalars['Int'];
+  CovidHistorical: CovidHistorical;
+  CovidTimelineCountry: CovidTimelineCountry;
   Boolean: Scalars['Boolean'];
+};
+
+export type CovidHistoricalResolvers<ContextType = any, ParentType extends ResolversParentTypes['CovidHistorical'] = ResolversParentTypes['CovidHistorical']> = {
+  dates?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  results?: Resolver<Array<ResolversTypes['CovidTimelineCountry']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType>;
+};
+
+export type CovidTimelineCountryResolvers<ContextType = any, ParentType extends ResolversParentTypes['CovidTimelineCountry'] = ResolversParentTypes['CovidTimelineCountry']> = {
+  country?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  province?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  cases?: Resolver<Array<ResolversTypes['Int']>, ParentType, ContextType>;
+  deaths?: Resolver<Array<ResolversTypes['Int']>, ParentType, ContextType>;
+  recovered?: Resolver<Array<ResolversTypes['Int']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   simple?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  covidHistorical?: Resolver<Maybe<ResolversTypes['CovidHistorical']>, ParentType, ContextType, RequireFields<QueryCovidHistoricalArgs, never>>;
 };
 
 export type Resolvers<ContextType = any> = {
+  CovidHistorical?: CovidHistoricalResolvers<ContextType>;
+  CovidTimelineCountry?: CovidTimelineCountryResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
 };
 
