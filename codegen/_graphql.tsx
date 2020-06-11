@@ -66,7 +66,7 @@ export type CovidHistoricalQuery = (
     & Pick<CovidHistorical, 'dates'>
     & { results: Array<(
       { __typename?: 'CovidTimelineCountry' }
-      & Pick<CovidTimelineCountry, 'province' | 'deaths' | 'recovered'>
+      & Pick<CovidTimelineCountry, 'province' | 'deaths' | 'cases'>
     )> }
   )> }
 );
@@ -87,7 +87,7 @@ export const CovidHistoricalDocument = gql`
     results {
       province
       deaths
-      recovered
+      cases
     }
   }
 }

@@ -1,11 +1,10 @@
-# Write your query or mutation here
 query covidHistorical($days: Int, $country: String) {
     covidHistorical(days: $days, country: $country) {
         dates
         results {
             province
             deaths
-            recovered
+            cases
         }
     }
 }

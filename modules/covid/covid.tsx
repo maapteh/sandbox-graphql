@@ -41,7 +41,7 @@ export const Covid = ({ ssr = true }: Props) => {
                                 return (
                                     <>
                                         <i>{date}</i>: death: {item.deaths[n]},
-                                        recovered: {item.recovered[n]}
+                                        cases: {item.cases[n]}
                                         <br />
                                     </>
                                 );
