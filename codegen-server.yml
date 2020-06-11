@@ -1,0 +1,12 @@
+overwrite: true
+schema:
+    - './pages/api/graphql/schema.ts'
+generates:
+    codegen/_resolvers.tsx:
+        plugins:
+            - 'typescript'
+            - 'typescript-resolvers':
+                  avoidOptionals: false
+    _schema.graphql:
+        plugins:
+            - schema-ast

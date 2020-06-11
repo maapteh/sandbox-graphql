@@ -7,13 +7,8 @@ generates:
         plugins:
             - 'typescript'
             - 'typescript-operations'
-            - 'typescript-resolvers':
-                  avoidOptionals: false
             - 'typescript-react-apollo'
         config:
             withHooks: true
             hooksImportFrom: '@apollo/react-hooks'
             avoidOptionals: true
-    _schema.graphql:
-        plugins:
-            - schema-ast
