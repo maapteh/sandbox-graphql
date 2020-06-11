@@ -8,13 +8,13 @@ export const typeDefs = gql`
         simple: String
 
         """
-        Get historical data of all countries
+        Get historical Covid data of all countries
         """
         covidHistorical(
             """
             Amount of days in the past, till now
             """
-            days: Int
+            size: Int
             """
             Specific country you are interested in, for example "**Netherlands**"
             """
@@ -27,11 +27,11 @@ export const typeDefs = gql`
     """
     type CovidHistorical {
         """
-        The last ten days
+        The last x days, default is 10 when days are not given
         """
         dates: [String!]!
         """
-        The Covid results for the countries
+        The Covid results for the countries, or specific country when given
         """
         results: [CovidTimelineCountry!]!
     }

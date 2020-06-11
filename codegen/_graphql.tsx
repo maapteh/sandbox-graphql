@@ -20,9 +20,9 @@ export type Scalars = {
 /** Historical Covid data for countries */
 export type CovidHistorical = {
   __typename?: 'CovidHistorical';
-  /** The last ten days */
+  /** The last x days, default is 10 when days are not given */
   dates: Array<Scalars['String']>;
-  /** The Covid results for the countries */
+  /** The Covid results for the countries, or specific country when given */
   results: Array<CovidTimelineCountry>;
 };
 
@@ -45,13 +45,13 @@ export type Query = {
   __typename?: 'Query';
   /** Have a simple example */
   simple: Maybe<Scalars['String']>;
-  /** Get historical data of all countries */
+  /** Get historical Covid data of all countries */
   covidHistorical: Maybe<CovidHistorical>;
 };
 
 
 export type QueryCovidHistoricalArgs = {
-  days: Maybe<Scalars['Int']>;
+  size: Maybe<Scalars['Int']>;
   country: Maybe<Scalars['String']>;
 };
 
