@@ -36,7 +36,7 @@ Almost there, now we have to fetch the actual data and resolve this. Add the 'co
 const response = await fetch('https://disease.sh/v2/historical?lastdays=10');
 ```
 
-Its time to code, and at same time maybe look at http://localhost:3000/api/graphql to debug on the fly. Its also possible to run the app in debug mode `yarn dev:inspect`.
+Its time to code, and at same time maybe look at http://localhost:3000/api/graphql to debug on the fly. Its also possible to run the app in debug mode, stop current one and then run `yarn dev:inspect`.
 
 After you exposed the data, you will find out that not every field is how you expected it to be. Also it happens that after exposing the data the schema you defined may not be so smart (for example repetition of data). So its common you adjust in this phase. It also happens when exposing more then one consumer. Think more, less problems on the long run.
 
