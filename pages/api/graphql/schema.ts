@@ -23,7 +23,7 @@ export const typeDefs = gql`
     """
     type CovidHistorical {
         """
-        The last ten days
+        The last x days, default is 10 when not passed
         """
         dates: [String!]!
         """

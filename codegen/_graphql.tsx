@@ -20,7 +20,7 @@ export type Scalars = {
 /** Historical Covid data for countries */
 export type CovidHistorical = {
   __typename?: 'CovidHistorical';
-  /** The last ten days */
+  /** The last x days, default is 10 when not passed */
   dates: Array<Scalars['String']>;
   /** The Covid results for the countries */
   results: Array<CovidTimelineCountry>;

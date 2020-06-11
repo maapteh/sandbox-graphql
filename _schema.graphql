@@ -1,8 +1,6 @@
-""" AUTO GENERATED FOR EDITOR, DO NOT EDIT """
-
 """Historical Covid data for countries"""
 type CovidHistorical {
-  """The last ten days"""
+  """The last x days, default is 10 when not passed"""
   dates: [String!]!
 
   """The Covid results for the countries"""
