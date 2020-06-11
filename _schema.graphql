@@ -1,3 +1,5 @@
+""" AUTO GENERATED FOR EDITOR, DO NOT EDIT """
+
 """Historical Covid data for countries"""
 type CovidHistorical {
   """The last ten days"""
@@ -30,5 +32,8 @@ type Query {
   simple: String
 
   """Get historical data of all countries"""
-  covidHistorical: CovidHistorical
+  covidHistorical(
+    """Amount of days in the past, till now"""
+    days: Int
+  ): CovidHistorical
 }

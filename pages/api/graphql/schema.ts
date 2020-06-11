@@ -10,7 +10,12 @@ export const typeDefs = gql`
         """
         Get historical data of all countries
         """
-        covidHistorical: CovidHistorical
+        covidHistorical(
+            """
+            Amount of days in the past, till now
+            """
+            days: Int
+        ): CovidHistorical
     }
 
     """

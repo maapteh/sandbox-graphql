@@ -8,9 +8,9 @@ export const resolvers: Resolvers = {
             return 'Welcome to the AH GraphQL workshop';
         },
 
-        covidHistorical: async () => {
+        covidHistorical: async (_, { days = 10 }) => {
             const response = await fetch(
-                'https://disease.sh/v2/historical?lastdays=10',
+                `https://disease.sh/v2/historical?lastdays=${days}`,
             );
 
             if (response.status < 200 || response.status >= 300) {

@@ -6,6 +6,7 @@ import * as ApolloReactComponents from '@apollo/react-components';
 import * as ApolloReactHoc from '@apollo/react-hoc';
 import * as ApolloReactHooks from '@apollo/react-hooks';
 export type Maybe<T> = T | null;
+export type RequireFields<T, K extends keyof T> = { [X in Exclude<keyof T, K>]?: T[X] } & { [P in K]-?: NonNullable<T[P]> };
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
@@ -46,6 +47,11 @@ export type Query = {
   simple: Maybe<Scalars['String']>;
   /** Get historical data of all countries */
   covidHistorical: Maybe<CovidHistorical>;
+};
+
+
+export type QueryCovidHistoricalArgs = {
+  days: Maybe<Scalars['Int']>;
 };
 
 export type SimpleQueryVariables = {};
@@ -136,9 +142,9 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 export type ResolversTypes = {
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']>;
+  Int: ResolverTypeWrapper<Scalars['Int']>;
   CovidHistorical: ResolverTypeWrapper<CovidHistorical>;
   CovidTimelineCountry: ResolverTypeWrapper<CovidTimelineCountry>;
-  Int: ResolverTypeWrapper<Scalars['Int']>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
 };
 
@@ -146,9 +152,9 @@ export type ResolversTypes = {
 export type ResolversParentTypes = {
   Query: {};
   String: Scalars['String'];
+  Int: Scalars['Int'];
   CovidHistorical: CovidHistorical;
   CovidTimelineCountry: CovidTimelineCountry;
-  Int: Scalars['Int'];
   Boolean: Scalars['Boolean'];
 };
 
@@ -169,7 +175,7 @@ export type CovidTimelineCountryResolvers<ContextType = any, ParentType extends 
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   simple?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  covidHistorical?: Resolver<Maybe<ResolversTypes['CovidHistorical']>, ParentType, ContextType>;
+  covidHistorical?: Resolver<Maybe<ResolversTypes['CovidHistorical']>, ParentType, ContextType, RequireFields<QueryCovidHistoricalArgs, never>>;
 };
 
 export type Resolvers<ContextType = any> = {
