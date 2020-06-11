@@ -1,4 +1,4 @@
-import { Resolvers } from '../../../codegen/_graphql';
+import { Resolvers } from '../../../codegen/_resolvers';
 
 export const resolvers: Resolvers = {
     Query: {
