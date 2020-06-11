@@ -1,4 +1,4 @@
-import { Resolvers } from '../../../codegen/_graphql';
+import { Resolvers } from '../../../codegen/_resolvers';
 import { GraphQLError } from 'graphql';
 
 export const resolvers: Resolvers = {
