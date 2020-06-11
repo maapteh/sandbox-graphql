@@ -15,7 +15,7 @@ const country = 'Netherlands';
 export const CovidVisual = () => {
     const { data, loading } = useCovidHistoricalQuery({
         variables: {
-            days: 30,
+            size: 30,
             country: country,
         },
         ssr: false,

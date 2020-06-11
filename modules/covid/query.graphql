@@ -1,5 +1,5 @@
-query covidHistorical($days: Int, $country: String) {
-    covidHistorical(days: $days, country: $country) {
+query covidHistorical($size: Int, $country: String) {
+    covidHistorical(size: $size, country: $country) {
         dates
         results {
             province

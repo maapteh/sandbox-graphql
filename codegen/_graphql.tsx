@@ -49,12 +49,12 @@ export type Query = {
 
 
 export type QueryCovidHistoricalArgs = {
-  days: Maybe<Scalars['Int']>;
+  size: Maybe<Scalars['Int']>;
   country: Maybe<Scalars['String']>;
 };
 
 export type CovidHistoricalQueryVariables = {
-  days: Maybe<Scalars['Int']>;
+  size: Maybe<Scalars['Int']>;
   country: Maybe<Scalars['String']>;
 };
 
@@ -81,8 +81,8 @@ export type SimpleQuery = (
 
 
 export const CovidHistoricalDocument = gql`
-    query covidHistorical($days: Int, $country: String) {
-  covidHistorical(days: $days, country: $country) {
+    query covidHistorical($size: Int, $country: String) {
+  covidHistorical(size: $size, country: $country) {
     dates
     results {
       province
@@ -124,7 +124,7 @@ export function withCovidHistorical<TProps, TChildProps = {}, TDataName extends 
  * @example
  * const { data, loading, error } = useCovidHistoricalQuery({
  *   variables: {
- *      days: // value for 'days'
+ *      size: // value for 'size'
  *      country: // value for 'country'
  *   },
  * });

@@ -16,7 +16,7 @@ export const Covid = ({ ssr = true }: Props) => {
     const { data } = useCovidHistoricalQuery({
         ssr,
         variables: {
-            days: 4,
+            size: 4,
             country: 'Netherlands',
         },
     });

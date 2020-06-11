@@ -44,7 +44,7 @@ export type Query = {
 
 
 export type QueryCovidHistoricalArgs = {
-  days?: Maybe<Scalars['Int']>;
+  size?: Maybe<Scalars['Int']>;
   country?: Maybe<Scalars['String']>;
 };
 
