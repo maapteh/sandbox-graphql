@@ -5,7 +5,7 @@
 ## Pre-requisites
 
 -   `yarn`, with node10 or node12
--   [vscode prisma graphql plugin](https://marketplace.visualstudio.com/items?itemName=Prisma.vscode-graphql) (optional)
+-   editor plugins: [vscode prisma graphql plugin](https://marketplace.visualstudio.com/items?itemName=Prisma.vscode-graphql), or [jetbrains](https://plugins.jetbrains.com/plugin/8097-js-graphql) (optional)
 
 ## File structure
 
