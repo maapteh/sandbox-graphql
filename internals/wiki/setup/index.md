@@ -2,8 +2,12 @@
 
 > Welcome at this setup for quick starting with GraphQL. Overhere you will find some information about the setup you are now using, by simply running `yarn dev`
 
+## Server
+
 We have the server in this location [/pages/api/graphql](/pages/api/graphql). In the main file you find the basic configuration of the graphql server where you can set things like context, run in mocked mode etc.
 You will also find the schema (interfaces) and resolvers (services). In these three different files you can do everything you have to do for our workshop. Our own team is using graphql-modules but since its moving to V1 we keep the workshop as simple as possible so everyone can enter.
+
+## Client
 
 We have our frontend application in these locations [/pages/index](/pages/index.tsx) (page) and [/modules](/modules) (modules/features). For the client we use [Apollo](/lib/apollo.tsx), see 'createApolloClient' for its configuration.
 
@@ -20,16 +24,11 @@ and this query returns data, error loading etc. Also you will be able to add var
 
 So from your editor you will see all options it returns:
 
-![](./hooks-1.png)
+![](./hooks-1.png){width=250px}
 
 and the options you can provide:
 
 ![](./hooks-2.png)
-image
-
-blahblah
-
-image
 
 ## Editor plugin
 
