@@ -14,7 +14,7 @@ export const typeDefs = gql`
             """
             Amount of days in the past, till now
             """
-            days: Int
+            size: Int
         ): CovidHistorical
     }
 
