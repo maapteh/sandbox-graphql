@@ -1,0 +1,7 @@
+overwrite: true
+schema:
+    - './pages/api/graphql/schema.ts'
+generates:
+    _schema.graphql:
+        plugins:
+            - schema-ast
