@@ -55,6 +55,24 @@ export type QueryCovidHistoricalArgs = {
   country: Maybe<Scalars['String']>;
 };
 
+export type CovidHistoricalQueryVariables = {
+  days: Maybe<Scalars['Int']>;
+  country: Maybe<Scalars['String']>;
+};
+
+
+export type CovidHistoricalQuery = (
+  { __typename?: 'Query' }
+  & { covidHistorical: Maybe<(
+    { __typename?: 'CovidHistorical' }
+    & Pick<CovidHistorical, 'dates'>
+    & { results: Array<(
+      { __typename?: 'CovidTimelineCountry' }
+      & Pick<CovidTimelineCountry, 'province' | 'deaths' | 'recovered'>
+    )> }
+  )> }
+);
+
 export type SimpleQueryVariables = {};
 
 
@@ -193,6 +211,64 @@ export type Resolvers<ContextType = any> = {
 export type IResolvers<ContextType = any> = Resolvers<ContextType>;
 
 
+export const CovidHistoricalDocument = gql`
+    query covidHistorical($days: Int, $country: String) {
+  covidHistorical(days: $days, country: $country) {
+    dates
+    results {
+      province
+      deaths
+      recovered
+    }
+  }
+}
+    `;
+export type CovidHistoricalComponentProps = Omit<ApolloReactComponents.QueryComponentOptions<CovidHistoricalQuery, CovidHistoricalQueryVariables>, 'query'>;
+
+    export const CovidHistoricalComponent = (props: CovidHistoricalComponentProps) => (
+      <ApolloReactComponents.Query<CovidHistoricalQuery, CovidHistoricalQueryVariables> query={CovidHistoricalDocument} {...props} />
+    );
+    
+export type CovidHistoricalProps<TChildProps = {}, TDataName extends string = 'data'> = {
+      [key in TDataName]: ApolloReactHoc.DataValue<CovidHistoricalQuery, CovidHistoricalQueryVariables>
+    } & TChildProps;
+export function withCovidHistorical<TProps, TChildProps = {}, TDataName extends string = 'data'>(operationOptions?: ApolloReactHoc.OperationOption<
+  TProps,
+  CovidHistoricalQuery,
+  CovidHistoricalQueryVariables,
+  CovidHistoricalProps<TChildProps, TDataName>>) {
+    return ApolloReactHoc.withQuery<TProps, CovidHistoricalQuery, CovidHistoricalQueryVariables, CovidHistoricalProps<TChildProps, TDataName>>(CovidHistoricalDocument, {
+      alias: 'covidHistorical',
+      ...operationOptions
+    });
+};
+
+/**
+ * __useCovidHistoricalQuery__
+ *
+ * To run a query within a React component, call `useCovidHistoricalQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCovidHistoricalQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCovidHistoricalQuery({
+ *   variables: {
+ *      days: // value for 'days'
+ *      country: // value for 'country'
+ *   },
+ * });
+ */
+export function useCovidHistoricalQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<CovidHistoricalQuery, CovidHistoricalQueryVariables>) {
+        return ApolloReactHooks.useQuery<CovidHistoricalQuery, CovidHistoricalQueryVariables>(CovidHistoricalDocument, baseOptions);
+      }
+export function useCovidHistoricalLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<CovidHistoricalQuery, CovidHistoricalQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<CovidHistoricalQuery, CovidHistoricalQueryVariables>(CovidHistoricalDocument, baseOptions);
+        }
+export type CovidHistoricalQueryHookResult = ReturnType<typeof useCovidHistoricalQuery>;
+export type CovidHistoricalLazyQueryHookResult = ReturnType<typeof useCovidHistoricalLazyQuery>;
+export type CovidHistoricalQueryResult = ApolloReactCommon.QueryResult<CovidHistoricalQuery, CovidHistoricalQueryVariables>;
 export const SimpleDocument = gql`
     query simple {
   simple
