@@ -6,5 +6,50 @@ export const typeDefs = gql`
         Have a simple example
         """
         simple: String
+
+        """
+        Get historical data of all countries
+        """
+        covidHistorical: CovidHistorical
+    }
+
+    """
+    Historical Covid data for countries
+    """
+    type CovidHistorical {
+        """
+        The last ten days
+        """
+        dates: [String!]!
+        """
+        The Covid results for the countries
+        """
+        results: [CovidTimelineCountry!]!
+    }
+
+    """
+    Covid results per country showing cases, deaths and recoverd
+    """
+    type CovidTimelineCountry {
+        """
+        Country name
+        """
+        country: String!
+        """
+        Province
+        """
+        province: String
+        """
+        Known amount of Covid cases
+        """
+        cases: [Int!]!
+        """
+        Known amount of Covid deaths
+        """
+        deaths: [Int!]!
+        """
+        Known amount of Covid reciveries
+        """
+        recovered: [Int!]!
     }
 `;
