@@ -1,5 +1,3 @@
-""" AUTO GENERATED FOR EDITOR, DO NOT EDIT """
-
 type Query {
   """Have a simple example"""
   simple: String
