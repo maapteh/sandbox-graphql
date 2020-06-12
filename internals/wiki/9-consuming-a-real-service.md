@@ -47,3 +47,7 @@ When you are done, run `yarn schema:linter`
 1. We exposed historical data of ten last days, make the days configurable from the query
 2. We exposed all historical data, now make it optional to filter for a specific country.
 3. We created an endpoint now display the information, frontend is easy when the data is typed :)
+
+The end result can be something like:
+
+<img src="./img/9-result.png" width="400px" />
