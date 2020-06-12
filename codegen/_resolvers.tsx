@@ -9,10 +9,56 @@ export type Scalars = {
   Float: number;
 };
 
+/**
+ * Historical Covid data for countries
+ * 
+ * A better solution for this excersise would be the following:
+ * 
+ * query covidHistorical: [covidHistorical!] where covidHistorical would be:
+ * 
+ * date: String (Bonus when you used custom Date scalar, for strictly typing!)
+ * countries: [covidHistoricalCountry!]!
+ * 
+ * covidHistoricalCountry:
+ * code: CountryCode!, province: String, cases: Int!, death: Int!, recovered: Int!
+ * 
+ * Just proceed with one of these two, to the bonus questions to find out why the
+ * better solution above works better :) Playing, moving, shifting is what
+ * schematising is all about. Your output model is very important, more then you
+ * are used to in Rest where you just build it based on one scenario and just add
+ * more fields later on. Untill there are so many fields and you dont know what is what anymore.
+ * 
+ * Advise: dont't rush things, never take your resources naming always as is
+ */
+export type CovidHistorical = {
+  __typename?: 'CovidHistorical';
+  /** The last ten days */
+  dates: Array<Scalars['String']>;
+  /** The Covid results for the countries */
+  results: Array<CovidTimelineCountry>;
+};
+
+/** Covid results per country showing cases, deaths and recoverd */
+export type CovidTimelineCountry = {
+  __typename?: 'CovidTimelineCountry';
+  /** Country name */
+  country: Scalars['String'];
+  /** Province */
+  province?: Maybe<Scalars['String']>;
+  /** Known amount of Covid cases */
+  cases: Array<Scalars['Int']>;
+  /** Known amount of Covid deaths */
+  deaths: Array<Scalars['Int']>;
+  /** Known amount of Covid reciveries */
+  recovered: Array<Scalars['Int']>;
+};
+
 export type Query = {
   __typename?: 'Query';
   /** Have a simple example */
   simple?: Maybe<Scalars['String']>;
+  /** Get historical data of all countries */
+  covidHistorical?: Maybe<CovidHistorical>;
 };
 
 
@@ -95,6 +141,9 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 export type ResolversTypes = {
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']>;
+  CovidHistorical: ResolverTypeWrapper<CovidHistorical>;
+  CovidTimelineCountry: ResolverTypeWrapper<CovidTimelineCountry>;
+  Int: ResolverTypeWrapper<Scalars['Int']>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
 };
 
@@ -102,14 +151,35 @@ export type ResolversTypes = {
 export type ResolversParentTypes = {
   Query: {};
   String: Scalars['String'];
+  CovidHistorical: CovidHistorical;
+  CovidTimelineCountry: CovidTimelineCountry;
+  Int: Scalars['Int'];
   Boolean: Scalars['Boolean'];
+};
+
+export type CovidHistoricalResolvers<ContextType = any, ParentType extends ResolversParentTypes['CovidHistorical'] = ResolversParentTypes['CovidHistorical']> = {
+  dates?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  results?: Resolver<Array<ResolversTypes['CovidTimelineCountry']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType>;
+};
+
+export type CovidTimelineCountryResolvers<ContextType = any, ParentType extends ResolversParentTypes['CovidTimelineCountry'] = ResolversParentTypes['CovidTimelineCountry']> = {
+  country?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  province?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  cases?: Resolver<Array<ResolversTypes['Int']>, ParentType, ContextType>;
+  deaths?: Resolver<Array<ResolversTypes['Int']>, ParentType, ContextType>;
+  recovered?: Resolver<Array<ResolversTypes['Int']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   simple?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  covidHistorical?: Resolver<Maybe<ResolversTypes['CovidHistorical']>, ParentType, ContextType>;
 };
 
 export type Resolvers<ContextType = any> = {
+  CovidHistorical?: CovidHistoricalResolvers<ContextType>;
+  CovidTimelineCountry?: CovidTimelineCountryResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
 };
 
