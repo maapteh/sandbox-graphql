@@ -33,5 +33,9 @@ export const resolvers: Resolvers = {
     // now info gets information of our dataloader
     SpacexShip: {
         info: async (ship, _, context) => context.spacexShipLoader.load(ship.id)
-    }
+    },
+
+    SpacexLaunch: {
+        images: async (ship, _, context) => context.spacexLaunchLoader.load(ship.id)
+    },
 };

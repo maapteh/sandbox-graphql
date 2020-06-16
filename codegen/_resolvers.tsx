@@ -20,7 +20,10 @@ export type Query = {
 /** Launch information */
 export type SpacexLaunch = {
   __typename?: 'SpacexLaunch';
+  /** Launch identification */
   id?: Maybe<Scalars['ID']>;
+  /** Collection of image urls */
+  images?: Maybe<Array<Scalars['String']>>;
 };
 
 /** Spacex ship */
@@ -148,6 +151,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
 
 export type SpacexLaunchResolvers<ContextType = any, ParentType extends ResolversParentTypes['SpacexLaunch'] = ResolversParentTypes['SpacexLaunch']> = {
   id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  images?: Resolver<Maybe<Array<ResolversTypes['String']>>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 

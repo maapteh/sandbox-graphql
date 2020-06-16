@@ -26,7 +26,10 @@ export type Query = {
 /** Launch information */
 export type SpacexLaunch = {
   __typename?: 'SpacexLaunch';
+  /** Launch identification */
   id: Maybe<Scalars['ID']>;
+  /** Collection of image urls */
+  images: Maybe<Array<Scalars['String']>>;
 };
 
 /** Spacex ship */

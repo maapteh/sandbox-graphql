@@ -52,7 +52,14 @@ export const typeDefs = gql`
     Launch information
     """
     type SpacexLaunch {
+        """
+        Launch identification
+        """
         id: ID
+        """
+        Collection of image urls
+        """
+        images: [String!]
     }
 
 `;
