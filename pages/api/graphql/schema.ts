@@ -9,7 +9,16 @@ export const typeDefs = gql`
         """
         Get all the favorite lists this user has made
         """
-        lists: [List!]
+        lists(
+            """
+            Starting index of page
+            """
+            start: Int!
+            """
+            Size of the page
+            """
+            size: Int
+        ): ListsResult
         """
         Get list by id
         """
@@ -19,6 +28,20 @@ export const typeDefs = gql`
             """
             id: Int!
         ): List
+    }
+
+    """
+    Paged result of lists query
+    """
+    type ListsResult {
+        """
+        Paged collection
+        """
+        result: [List!]
+        """
+        Total amount of items in collection
+        """
+        total: Int!
     }
 
     """
