@@ -13,7 +13,7 @@ export const resolvers: Resolvers = {
             );
 
             if (response.status < 200 || response.status >= 300) {
-                throw new GraphQLError('Covid error');
+                throw new GraphQLError('spacex error');
             }
 
             const data = await response.json();
@@ -29,4 +29,33 @@ export const resolvers: Resolvers = {
             });
         }
     },
+
+
+    SpacexShip: {
+        info: async (ship) => {
+            const response = await fetch(
+                `https://api.spacexdata.com/v4/ships/${ship.id}`,
+            );
+
+            if (response.status < 200 || response.status >= 300) {
+                throw new GraphQLError('spacex ship error');
+            }
+
+            const data = await response.json();
+
+            if (!data) {
+                return null;
+            }
+
+            return {
+                type: data.type,
+                image: data.image,
+                launches: data.launches.map((id: string) => {
+                    return {
+                        id
+                    }
+                })
+            }
+        }
+    }
 };

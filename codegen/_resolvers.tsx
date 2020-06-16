@@ -17,11 +17,30 @@ export type Query = {
   spacexShips?: Maybe<Array<SpacexShip>>;
 };
 
+/** Launch information */
+export type SpacexLaunch = {
+  __typename?: 'SpacexLaunch';
+  id?: Maybe<Scalars['ID']>;
+};
+
 /** Spacex ship */
 export type SpacexShip = {
   __typename?: 'SpacexShip';
   /** Identification string of the space ship */
   id?: Maybe<Scalars['ID']>;
+  /** Basic ship information */
+  info?: Maybe<SpacexShipInfo>;
+};
+
+/** Ship information */
+export type SpacexShipInfo = {
+  __typename?: 'SpacexShipInfo';
+  /** Ship type, can also be enum now kept as string for simplicity */
+  type: Scalars['String'];
+  /** Image url with the space ship */
+  image: Scalars['String'];
+  /** Launches this ship did */
+  launches?: Maybe<Array<SpacexLaunch>>;
 };
 
 
@@ -106,6 +125,8 @@ export type ResolversTypes = {
   String: ResolverTypeWrapper<Scalars['String']>;
   SpacexShip: ResolverTypeWrapper<SpacexShip>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
+  SpacexShipInfo: ResolverTypeWrapper<SpacexShipInfo>;
+  SpacexLaunch: ResolverTypeWrapper<SpacexLaunch>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
 };
 
@@ -115,6 +136,8 @@ export type ResolversParentTypes = {
   String: Scalars['String'];
   SpacexShip: SpacexShip;
   ID: Scalars['ID'];
+  SpacexShipInfo: SpacexShipInfo;
+  SpacexLaunch: SpacexLaunch;
   Boolean: Scalars['Boolean'];
 };
 
@@ -123,14 +146,29 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   spacexShips?: Resolver<Maybe<Array<ResolversTypes['SpacexShip']>>, ParentType, ContextType>;
 };
 
+export type SpacexLaunchResolvers<ContextType = any, ParentType extends ResolversParentTypes['SpacexLaunch'] = ResolversParentTypes['SpacexLaunch']> = {
+  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType>;
+};
+
 export type SpacexShipResolvers<ContextType = any, ParentType extends ResolversParentTypes['SpacexShip'] = ResolversParentTypes['SpacexShip']> = {
   id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  info?: Resolver<Maybe<ResolversTypes['SpacexShipInfo']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType>;
+};
+
+export type SpacexShipInfoResolvers<ContextType = any, ParentType extends ResolversParentTypes['SpacexShipInfo'] = ResolversParentTypes['SpacexShipInfo']> = {
+  type?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  image?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  launches?: Resolver<Maybe<Array<ResolversTypes['SpacexLaunch']>>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
 export type Resolvers<ContextType = any> = {
   Query?: QueryResolvers<ContextType>;
+  SpacexLaunch?: SpacexLaunchResolvers<ContextType>;
   SpacexShip?: SpacexShipResolvers<ContextType>;
+  SpacexShipInfo?: SpacexShipInfoResolvers<ContextType>;
 };
 
 

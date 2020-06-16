@@ -6,8 +6,28 @@ type Query {
   spacexShips: [SpacexShip!]
 }
 
+"""Launch information"""
+type SpacexLaunch {
+  id: ID
+}
+
 """Spacex ship"""
 type SpacexShip {
   """Identification string of the space ship"""
   id: ID
+
+  """Basic ship information"""
+  info: SpacexShipInfo
+}
+
+"""Ship information"""
+type SpacexShipInfo {
+  """Ship type, can also be enum now kept as string for simplicity"""
+  type: String!
+
+  """Image url with the space ship"""
+  image: String!
+
+  """Launches this ship did"""
+  launches: [SpacexLaunch!]
 }

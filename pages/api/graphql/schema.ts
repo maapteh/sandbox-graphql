@@ -22,4 +22,37 @@ export const typeDefs = gql`
         """
         id: ID
     }
+
+    extend type SpacexShip {
+        """
+        Basic ship information
+        """
+        info: SpacexShipInfo
+    }
+
+    """
+    Ship information
+    """
+    type SpacexShipInfo {
+        """
+        Ship type, can also be enum now kept as string for simplicity
+        """
+        type: String!
+        """
+        Image url with the space ship
+        """
+        image: String!
+        """
+        Launches this ship did
+        """
+        launches: [SpacexLaunch!]
+    }
+
+    """
+    Launch information
+    """
+    type SpacexLaunch {
+        id: ID
+    }
+
 `;

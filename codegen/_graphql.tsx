@@ -23,11 +23,30 @@ export type Query = {
   spacexShips: Maybe<Array<SpacexShip>>;
 };
 
+/** Launch information */
+export type SpacexLaunch = {
+  __typename?: 'SpacexLaunch';
+  id: Maybe<Scalars['ID']>;
+};
+
 /** Spacex ship */
 export type SpacexShip = {
   __typename?: 'SpacexShip';
   /** Identification string of the space ship */
   id: Maybe<Scalars['ID']>;
+  /** Basic ship information */
+  info: Maybe<SpacexShipInfo>;
+};
+
+/** Ship information */
+export type SpacexShipInfo = {
+  __typename?: 'SpacexShipInfo';
+  /** Ship type, can also be enum now kept as string for simplicity */
+  type: Scalars['String'];
+  /** Image url with the space ship */
+  image: Scalars['String'];
+  /** Launches this ship did */
+  launches: Maybe<Array<SpacexLaunch>>;
 };
 
 export type SimpleQueryVariables = {};
