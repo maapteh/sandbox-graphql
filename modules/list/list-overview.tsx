@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { useListsQuery } from '../../codegen/_graphql';
+import { useListsQuery, useListRenameMutation } from '../../codegen/_graphql';
 import { ListItems } from './list-items';
 
 const List = styled.div`
     padding: 8px;
     margin: 0 0 24px;
     border: 1px solid #eee;
+`;
+
+const Anchor = styled.a`
+    text-decoration: underline;
+    cursor: pointer;
+    margin-left: 8px;
 `;
 
 const START_INITIAL = 0;
@@ -21,6 +27,10 @@ export const ListOverview: React.FC = () => {
         },
     });
 
+    const [description, setDescription] = useState('');
+    const [selectedId, setSelectedId] = useState<number | null>(null);
+    const [rename] = useListRenameMutation();
+
     if (loading) {
         return <p>Loading...</p>;
     }
@@ -33,10 +43,52 @@ export const ListOverview: React.FC = () => {
         <>
             {data?.lists?.result?.map((list) => (
                 <List key={list.id}>
-                    {list.description}
+                    {selectedId !== list.id && list.description}
+                    {selectedId === list.id && (
+                        <>
+                            <input
+                                value={description}
+                                onChange={(e) => {
+                                    if (e.target.value) {
+                                        setDescription(e.target.value);
+                                    }
+                                }}
+                            />
+                            <button
+                                onClick={() => {
+                                    rename({
+                                        variables: {
+                                            id: selectedId,
+                                            description,
+                                        },
+                                    });
+                                    setDescription('');
+                                    setSelectedId(null);
+                                }}
+                            >
+                                Save
+                            </button>
+                            <button onClick={() => setSelectedId(null)}>
+                                Cancel
+                            </button>
+                        </>
+                    )}
+                    {selectedId !== list.id && (
+                        <Anchor
+                            onClick={() => {
+                                setDescription(list.description);
+                                setSelectedId(
+                                    selectedId === list.id ? null : list.id,
+                                );
+                            }}
+                        >
+                            rename
+                        </Anchor>
+                    )}
                     <ListItems id={list.id} />
                 </List>
             ))}
+
             <button
                 onClick={() => {
                     const newStart = start + PAGE_SIZE;

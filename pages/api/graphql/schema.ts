@@ -30,6 +30,10 @@ export const typeDefs = gql`
         ): List
     }
 
+    type Mutation {
+        listRename(id: Int!, description: String!): List
+    }
+
     """
     Paged result of lists query
     """

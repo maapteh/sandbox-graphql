@@ -31,6 +31,10 @@ type ListsResult {
   total: Int!
 }
 
+type Mutation {
+  listRename(id: Int!, description: String!): List
+}
+
 type Query {
   """Have a simple example"""
   simple: String

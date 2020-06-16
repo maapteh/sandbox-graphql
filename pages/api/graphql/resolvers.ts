@@ -1,5 +1,5 @@
 import { Resolvers } from '../../../codegen/_resolvers';
-import { MOCK_LISTS } from './__mocks__/list-mocks';
+import { listService } from './__mocks__/list-mocks';
 
 export const resolvers: Resolvers = {
     Query: {
@@ -8,23 +8,17 @@ export const resolvers: Resolvers = {
             return 'Welcome to the AH GraphQL workshop';
         },
         lists: (_, { start, size }) => {
-            if (start < 0 || start > MOCK_LISTS.length) {
-                return null;
-            }
-
-            return {
-                result: MOCK_LISTS.slice(
-                    start,
-                    Math.min(start + (size || 5), MOCK_LISTS.length),
-                ),
-                total: MOCK_LISTS.length,
-            };
+            return listService.all(start, size || 5);
         },
-        list: () => {
-            return {
-                id: 1,
-                description: 'Chocolate',
-            };
+        list: (_, { id }) => {
+            return listService.single(id);
+        },
+    },
+    Mutation: {
+        listRename: (_, { id, description }) => {
+            return listService.patch(id, { description })
+                ? listService.single(id)
+                : null;
         },
     },
     List: {
