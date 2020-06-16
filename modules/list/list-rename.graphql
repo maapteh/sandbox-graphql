@@ -1,0 +1,6 @@
+mutation listRename($id: Int!, $description: String!) {
+    listRename(id: $id, description: $description) {
+        id
+        description
+    }
+}

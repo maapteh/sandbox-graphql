@@ -41,6 +41,17 @@ export type ListsResult = {
   total: Scalars['Int'];
 };
 
+export type Mutation = {
+  __typename?: 'Mutation';
+  listRename?: Maybe<List>;
+};
+
+
+export type MutationListRenameArgs = {
+  id: Scalars['Int'];
+  description: Scalars['String'];
+};
+
 export type Query = {
   __typename?: 'Query';
   /** Have a simple example */
@@ -146,6 +157,7 @@ export type ResolversTypes = {
   ListsResult: ResolverTypeWrapper<ListsResult>;
   List: ResolverTypeWrapper<List>;
   ListItem: ResolverTypeWrapper<ListItem>;
+  Mutation: ResolverTypeWrapper<{}>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
 };
 
@@ -157,6 +169,7 @@ export type ResolversParentTypes = {
   ListsResult: ListsResult;
   List: List;
   ListItem: ListItem;
+  Mutation: {};
   Boolean: Scalars['Boolean'];
 };
 
@@ -180,6 +193,10 @@ export type ListsResultResolvers<ContextType = any, ParentType extends Resolvers
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
+export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
+  listRename?: Resolver<Maybe<ResolversTypes['List']>, ParentType, ContextType, RequireFields<MutationListRenameArgs, 'id' | 'description'>>;
+};
+
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   simple?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   lists?: Resolver<Maybe<ResolversTypes['ListsResult']>, ParentType, ContextType, RequireFields<QueryListsArgs, 'start'>>;
@@ -190,6 +207,7 @@ export type Resolvers<ContextType = any> = {
   List?: ListResolvers<ContextType>;
   ListItem?: ListItemResolvers<ContextType>;
   ListsResult?: ListsResultResolvers<ContextType>;
+  Mutation?: MutationResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
 };
 

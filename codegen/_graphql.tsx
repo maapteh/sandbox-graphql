@@ -46,6 +46,17 @@ export type ListsResult = {
   total: Scalars['Int'];
 };
 
+export type Mutation = {
+  __typename?: 'Mutation';
+  listRename: Maybe<List>;
+};
+
+
+export type MutationListRenameArgs = {
+  id: Scalars['Int'];
+  description: Scalars['String'];
+};
+
 export type Query = {
   __typename?: 'Query';
   /** Have a simple example */
@@ -80,6 +91,20 @@ export type ListItemsQuery = (
       { __typename?: 'ListItem' }
       & Pick<ListItem, 'id' | 'description' | 'quantity'>
     )>> }
+  )> }
+);
+
+export type ListRenameMutationVariables = {
+  id: Scalars['Int'];
+  description: Scalars['String'];
+};
+
+
+export type ListRenameMutation = (
+  { __typename?: 'Mutation' }
+  & { listRename: Maybe<(
+    { __typename?: 'List' }
+    & Pick<List, 'id' | 'description'>
   )> }
 );
 
@@ -166,6 +191,59 @@ export function useListItemsLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHo
 export type ListItemsQueryHookResult = ReturnType<typeof useListItemsQuery>;
 export type ListItemsLazyQueryHookResult = ReturnType<typeof useListItemsLazyQuery>;
 export type ListItemsQueryResult = ApolloReactCommon.QueryResult<ListItemsQuery, ListItemsQueryVariables>;
+export const ListRenameDocument = gql`
+    mutation listRename($id: Int!, $description: String!) {
+  listRename(id: $id, description: $description) {
+    id
+    description
+  }
+}
+    `;
+export type ListRenameMutationFn = ApolloReactCommon.MutationFunction<ListRenameMutation, ListRenameMutationVariables>;
+export type ListRenameComponentProps = Omit<ApolloReactComponents.MutationComponentOptions<ListRenameMutation, ListRenameMutationVariables>, 'mutation'>;
+
+    export const ListRenameComponent = (props: ListRenameComponentProps) => (
+      <ApolloReactComponents.Mutation<ListRenameMutation, ListRenameMutationVariables> mutation={ListRenameDocument} {...props} />
+    );
+    
+export type ListRenameProps<TChildProps = {}, TDataName extends string = 'mutate'> = {
+      [key in TDataName]: ApolloReactCommon.MutationFunction<ListRenameMutation, ListRenameMutationVariables>
+    } & TChildProps;
+export function withListRename<TProps, TChildProps = {}, TDataName extends string = 'mutate'>(operationOptions?: ApolloReactHoc.OperationOption<
+  TProps,
+  ListRenameMutation,
+  ListRenameMutationVariables,
+  ListRenameProps<TChildProps, TDataName>>) {
+    return ApolloReactHoc.withMutation<TProps, ListRenameMutation, ListRenameMutationVariables, ListRenameProps<TChildProps, TDataName>>(ListRenameDocument, {
+      alias: 'listRename',
+      ...operationOptions
+    });
+};
+
+/**
+ * __useListRenameMutation__
+ *
+ * To run a mutation, you first call `useListRenameMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useListRenameMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [listRenameMutation, { data, loading, error }] = useListRenameMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      description: // value for 'description'
+ *   },
+ * });
+ */
+export function useListRenameMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<ListRenameMutation, ListRenameMutationVariables>) {
+        return ApolloReactHooks.useMutation<ListRenameMutation, ListRenameMutationVariables>(ListRenameDocument, baseOptions);
+      }
+export type ListRenameMutationHookResult = ReturnType<typeof useListRenameMutation>;
+export type ListRenameMutationResult = ApolloReactCommon.MutationResult<ListRenameMutation>;
+export type ListRenameMutationOptions = ApolloReactCommon.BaseMutationOptions<ListRenameMutation, ListRenameMutationVariables>;
 export const ListsDocument = gql`
     query lists($start: Int!, $size: Int) {
   lists(start: $start, size: $size) {
