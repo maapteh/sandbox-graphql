@@ -16,5 +16,25 @@ export const resolvers: Resolvers = {
                 description: 'Chocolate',
             },
         ],
+        list: () => {
+            return {
+                id: 1,
+                description: 'Chocolate',
+            };
+        },
+    },
+    List: {
+        items: (list) => [
+            {
+                id: 1,
+                description: 'Cheese',
+                quantity: 2,
+            },
+            {
+                id: 2,
+                description: 'Milk',
+                quantity: 1,
+            },
+        ],
     },
 };

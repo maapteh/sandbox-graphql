@@ -18,10 +18,23 @@ export type Scalars = {
 /** Favorite list */
 export type List = {
   __typename?: 'List';
-  /** Id of list */
-  id: Scalars['Int'];
   /** Description entered by user */
   description: Scalars['String'];
+  /** Id of list */
+  id: Scalars['Int'];
+  /** Items contained in list */
+  items: Maybe<Array<ListItem>>;
+};
+
+/** Item contained in list */
+export type ListItem = {
+  __typename?: 'ListItem';
+  /** Id of list item */
+  id: Maybe<Scalars['Int']>;
+  /** Description of list item */
+  description: Maybe<Scalars['String']>;
+  /** Amount of list items */
+  quantity: Scalars['Int'];
 };
 
 export type Query = {
@@ -30,7 +43,30 @@ export type Query = {
   simple: Maybe<Scalars['String']>;
   /** Get all the favorite lists this user has made */
   lists: Maybe<Array<List>>;
+  /** Get list by id */
+  list: Maybe<List>;
 };
+
+
+export type QueryListArgs = {
+  id: Scalars['Int'];
+};
+
+export type ListItemsQueryVariables = {
+  id: Scalars['Int'];
+};
+
+
+export type ListItemsQuery = (
+  { __typename?: 'Query' }
+  & { list: Maybe<(
+    { __typename?: 'List' }
+    & { items: Maybe<Array<(
+      { __typename?: 'ListItem' }
+      & Pick<ListItem, 'id' | 'description' | 'quantity'>
+    )>> }
+  )> }
+);
 
 export type ListsQueryVariables = {};
 
@@ -52,6 +88,62 @@ export type SimpleQuery = (
 );
 
 
+export const ListItemsDocument = gql`
+    query listItems($id: Int!) {
+  list(id: $id) {
+    items {
+      id
+      description
+      quantity
+    }
+  }
+}
+    `;
+export type ListItemsComponentProps = Omit<ApolloReactComponents.QueryComponentOptions<ListItemsQuery, ListItemsQueryVariables>, 'query'> & ({ variables: ListItemsQueryVariables; skip?: boolean; } | { skip: boolean; });
+
+    export const ListItemsComponent = (props: ListItemsComponentProps) => (
+      <ApolloReactComponents.Query<ListItemsQuery, ListItemsQueryVariables> query={ListItemsDocument} {...props} />
+    );
+    
+export type ListItemsProps<TChildProps = {}, TDataName extends string = 'data'> = {
+      [key in TDataName]: ApolloReactHoc.DataValue<ListItemsQuery, ListItemsQueryVariables>
+    } & TChildProps;
+export function withListItems<TProps, TChildProps = {}, TDataName extends string = 'data'>(operationOptions?: ApolloReactHoc.OperationOption<
+  TProps,
+  ListItemsQuery,
+  ListItemsQueryVariables,
+  ListItemsProps<TChildProps, TDataName>>) {
+    return ApolloReactHoc.withQuery<TProps, ListItemsQuery, ListItemsQueryVariables, ListItemsProps<TChildProps, TDataName>>(ListItemsDocument, {
+      alias: 'listItems',
+      ...operationOptions
+    });
+};
+
+/**
+ * __useListItemsQuery__
+ *
+ * To run a query within a React component, call `useListItemsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useListItemsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useListItemsQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useListItemsQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<ListItemsQuery, ListItemsQueryVariables>) {
+        return ApolloReactHooks.useQuery<ListItemsQuery, ListItemsQueryVariables>(ListItemsDocument, baseOptions);
+      }
+export function useListItemsLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<ListItemsQuery, ListItemsQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<ListItemsQuery, ListItemsQueryVariables>(ListItemsDocument, baseOptions);
+        }
+export type ListItemsQueryHookResult = ReturnType<typeof useListItemsQuery>;
+export type ListItemsLazyQueryHookResult = ReturnType<typeof useListItemsLazyQuery>;
+export type ListItemsQueryResult = ApolloReactCommon.QueryResult<ListItemsQuery, ListItemsQueryVariables>;
 export const ListsDocument = gql`
     query lists {
   lists {
