@@ -15,10 +15,21 @@ export type Scalars = {
   Float: number;
 };
 
+/** Favorite list */
+export type List = {
+  __typename?: 'List';
+  /** Id of list */
+  id: Scalars['Int'];
+  /** Description entered by user */
+  description: Scalars['String'];
+};
+
 export type Query = {
   __typename?: 'Query';
   /** Have a simple example */
   simple: Maybe<Scalars['String']>;
+  /** Get all the favorite lists this user has made */
+  lists: Maybe<Array<List>>;
 };
 
 export type SimpleQueryVariables = {};
