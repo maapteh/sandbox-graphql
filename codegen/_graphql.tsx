@@ -37,14 +37,29 @@ export type ListItem = {
   quantity: Scalars['Int'];
 };
 
+/** Paged result of lists query */
+export type ListsResult = {
+  __typename?: 'ListsResult';
+  /** Paged collection */
+  result: Maybe<Array<List>>;
+  /** Total amount of items in collection */
+  total: Scalars['Int'];
+};
+
 export type Query = {
   __typename?: 'Query';
   /** Have a simple example */
   simple: Maybe<Scalars['String']>;
   /** Get all the favorite lists this user has made */
-  lists: Maybe<Array<List>>;
+  lists: Maybe<ListsResult>;
   /** Get list by id */
   list: Maybe<List>;
+};
+
+
+export type QueryListsArgs = {
+  start: Scalars['Int'];
+  size: Maybe<Scalars['Int']>;
 };
 
 
@@ -68,15 +83,22 @@ export type ListItemsQuery = (
   )> }
 );
 
-export type ListsQueryVariables = {};
+export type ListsQueryVariables = {
+  start: Scalars['Int'];
+  size: Maybe<Scalars['Int']>;
+};
 
 
 export type ListsQuery = (
   { __typename?: 'Query' }
-  & { lists: Maybe<Array<(
-    { __typename?: 'List' }
-    & Pick<List, 'id' | 'description'>
-  )>> }
+  & { lists: Maybe<(
+    { __typename?: 'ListsResult' }
+    & Pick<ListsResult, 'total'>
+    & { result: Maybe<Array<(
+      { __typename?: 'List' }
+      & Pick<List, 'id' | 'description'>
+    )>> }
+  )> }
 );
 
 export type SimpleQueryVariables = {};
@@ -145,14 +167,17 @@ export type ListItemsQueryHookResult = ReturnType<typeof useListItemsQuery>;
 export type ListItemsLazyQueryHookResult = ReturnType<typeof useListItemsLazyQuery>;
 export type ListItemsQueryResult = ApolloReactCommon.QueryResult<ListItemsQuery, ListItemsQueryVariables>;
 export const ListsDocument = gql`
-    query lists {
-  lists {
-    id
-    description
+    query lists($start: Int!, $size: Int) {
+  lists(start: $start, size: $size) {
+    result {
+      id
+      description
+    }
+    total
   }
 }
     `;
-export type ListsComponentProps = Omit<ApolloReactComponents.QueryComponentOptions<ListsQuery, ListsQueryVariables>, 'query'>;
+export type ListsComponentProps = Omit<ApolloReactComponents.QueryComponentOptions<ListsQuery, ListsQueryVariables>, 'query'> & ({ variables: ListsQueryVariables; skip?: boolean; } | { skip: boolean; });
 
     export const ListsComponent = (props: ListsComponentProps) => (
       <ApolloReactComponents.Query<ListsQuery, ListsQueryVariables> query={ListsDocument} {...props} />
@@ -184,6 +209,8 @@ export function withLists<TProps, TChildProps = {}, TDataName extends string = '
  * @example
  * const { data, loading, error } = useListsQuery({
  *   variables: {
+ *      start: // value for 'start'
+ *      size: // value for 'size'
  *   },
  * });
  */

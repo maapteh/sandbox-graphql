@@ -1,6 +1,9 @@
-query lists {
-    lists {
-        id
-        description
+query lists($start: Int!, $size: Int) {
+    lists(start: $start, size: $size) {
+        result {
+            id
+            description
+        }
+        total
     }
 }

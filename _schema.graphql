@@ -22,12 +22,27 @@ type ListItem {
   quantity: Int!
 }
 
+"""Paged result of lists query"""
+type ListsResult {
+  """Paged collection"""
+  result: [List!]
+
+  """Total amount of items in collection"""
+  total: Int!
+}
+
 type Query {
   """Have a simple example"""
   simple: String
 
   """Get all the favorite lists this user has made"""
-  lists: [List!]
+  lists(
+    """Starting index of page"""
+    start: Int!
+
+    """Size of the page"""
+    size: Int
+  ): ListsResult
 
   """Get list by id"""
   list(
