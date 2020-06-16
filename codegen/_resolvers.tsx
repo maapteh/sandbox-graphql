@@ -9,6 +9,15 @@ export type Scalars = {
   Float: number;
 };
 
+
+/** cache control */
+export enum CacheControlScope {
+  /** Personal data, based on jwt token and locale (see server.ts) */
+  Private = 'PRIVATE',
+  /** Public data, non personal */
+  Public = 'PUBLIC'
+}
+
 export type Query = {
   __typename?: 'Query';
   /** Have a simple example */
@@ -131,6 +140,8 @@ export type ResolversTypes = {
   SpacexShipInfo: ResolverTypeWrapper<SpacexShipInfo>;
   SpacexLaunch: ResolverTypeWrapper<SpacexLaunch>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
+  CacheControlScope: CacheControlScope;
+  Int: ResolverTypeWrapper<Scalars['Int']>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -142,7 +153,14 @@ export type ResolversParentTypes = {
   SpacexShipInfo: SpacexShipInfo;
   SpacexLaunch: SpacexLaunch;
   Boolean: Scalars['Boolean'];
+  CacheControlScope: CacheControlScope;
+  Int: Scalars['Int'];
 };
+
+export type CacheControlDirectiveArgs = {   maxAge?: Maybe<Scalars['Int']>;
+  scope?: Maybe<CacheControlScope>; };
+
+export type CacheControlDirectiveResolver<Result, Parent, ContextType = any, Args = CacheControlDirectiveArgs> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   simple?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -181,3 +199,13 @@ export type Resolvers<ContextType = any> = {
  * Use "Resolvers" root object instead. If you wish to get "IResolvers", add "typesPrefix: I" to your config.
  */
 export type IResolvers<ContextType = any> = Resolvers<ContextType>;
+export type DirectiveResolvers<ContextType = any> = {
+  cacheControl?: CacheControlDirectiveResolver<any, any, ContextType>;
+};
+
+
+/**
+ * @deprecated
+ * Use "DirectiveResolvers" root object instead. If you wish to get "IDirectiveResolvers", add "typesPrefix: I" to your config.
+ */
+export type IDirectiveResolvers<ContextType = any> = DirectiveResolvers<ContextType>;

@@ -10,13 +10,13 @@ export const typeDefs = gql`
         """
         Show all spacex ships
         """
-        spacexShips: [SpacexShip!]
+        spacexShips: [SpacexShip!] @cacheControl(maxAge: 600, scope: PUBLIC)
     }
 
     """
     Spacex ship
     """
-    type SpacexShip {
+    type SpacexShip @cacheControl(maxAge: 600, scope: PUBLIC) {
         """
         Identification string of the space ship
         """
@@ -33,7 +33,7 @@ export const typeDefs = gql`
     """
     Ship information
     """
-    type SpacexShipInfo {
+    type SpacexShipInfo @cacheControl(maxAge: 600, scope: PUBLIC) {
         """
         Ship type, can also be enum now kept as string for simplicity
         """
@@ -51,7 +51,7 @@ export const typeDefs = gql`
     """
     Launch information
     """
-    type SpacexLaunch {
+    type SpacexLaunch @cacheControl(maxAge: 600, scope: PUBLIC) {
         """
         Launch identification
         """
@@ -62,4 +62,26 @@ export const typeDefs = gql`
         images: [String!]
     }
 
+
+    """
+    cache control
+    """
+    enum CacheControlScope {
+        """
+        Personal data, based on jwt token and locale (see server.ts)
+        """
+        PRIVATE
+        """
+        Public data, non personal
+        """
+        PUBLIC
+    }
+
+    """
+    For how long to cache queries, fields
+    """
+    directive @cacheControl(
+        maxAge: Int
+        scope: CacheControlScope
+    ) on OBJECT | FIELD_DEFINITION | INTERFACE
 `;

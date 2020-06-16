@@ -1,3 +1,15 @@
+"""For how long to cache queries, fields"""
+directive @cacheControl(maxAge: Int, scope: CacheControlScope) on OBJECT | FIELD_DEFINITION | INTERFACE
+
+"""cache control"""
+enum CacheControlScope {
+  """Personal data, based on jwt token and locale (see server.ts)"""
+  PRIVATE
+
+  """Public data, non personal"""
+  PUBLIC
+}
+
 type Query {
   """Have a simple example"""
   simple: String

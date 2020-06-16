@@ -1,4 +1,5 @@
 import { ApolloServer, gql, ApolloError } from 'apollo-server-micro';
+import responseCachePlugin from 'apollo-server-plugin-response-cache';
 import { typeDefs } from './schema';
 import { resolvers } from './resolvers';
 
@@ -8,6 +9,8 @@ const apolloServer = new ApolloServer({
     typeDefs,
     resolvers,
     debug: false,
+    cacheControl: true,
+    plugins: [responseCachePlugin()],
     context: ({ req }) => {
         return {
             // we are putting this dataloader on the context

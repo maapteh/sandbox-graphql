@@ -15,6 +15,15 @@ export type Scalars = {
   Float: number;
 };
 
+
+/** cache control */
+export enum CacheControlScope {
+  /** Personal data, based on jwt token and locale (see server.ts) */
+  Private = 'PRIVATE',
+  /** Public data, non personal */
+  Public = 'PUBLIC'
+}
+
 export type Query = {
   __typename?: 'Query';
   /** Have a simple example */
