@@ -3,6 +3,7 @@ import styled from 'styled-components';
 // we're importing a generated React hook
 // the hook is actually a wrapper around the useQuery hook in `apollo-client`
 import { useListsQuery } from '../../codegen/_graphql';
+import { ListItems } from './list-items';
 
 // create a simple box to show our data in using styled components
 const List = styled.div`
@@ -35,7 +36,10 @@ export const ListOverview: React.FC = () => {
     return (
         <>
             {data.lists.map((list) => (
-                <List key={list.id}>{list.description}</List>
+                <List key={list.id}>
+                    {list.description}
+                    <ListItems id={list.id} />
+                </List>
             ))}
         </>
     );

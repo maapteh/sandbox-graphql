@@ -1,0 +1,9 @@
+query listItems($id: Int!) {
+    list(id: $id) {
+        items {
+            id
+            description
+            quantity
+        }
+    }
+}

@@ -1,5 +1,6 @@
 import { GraphQLResolveInfo } from 'graphql';
 export type Maybe<T> = T | null;
+export type RequireFields<T, K extends keyof T> = { [X in Exclude<keyof T, K>]?: T[X] } & { [P in K]-?: NonNullable<T[P]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -12,10 +13,23 @@ export type Scalars = {
 /** Favorite list */
 export type List = {
   __typename?: 'List';
-  /** Id of list */
-  id: Scalars['Int'];
   /** Description entered by user */
   description: Scalars['String'];
+  /** Id of list */
+  id: Scalars['Int'];
+  /** Items contained in list */
+  items?: Maybe<Array<ListItem>>;
+};
+
+/** Item contained in list */
+export type ListItem = {
+  __typename?: 'ListItem';
+  /** Id of list item */
+  id?: Maybe<Scalars['Int']>;
+  /** Description of list item */
+  description?: Maybe<Scalars['String']>;
+  /** Amount of list items */
+  quantity: Scalars['Int'];
 };
 
 export type Query = {
@@ -24,6 +38,13 @@ export type Query = {
   simple?: Maybe<Scalars['String']>;
   /** Get all the favorite lists this user has made */
   lists?: Maybe<Array<List>>;
+  /** Get list by id */
+  list?: Maybe<List>;
+};
+
+
+export type QueryListArgs = {
+  id: Scalars['Int'];
 };
 
 
@@ -108,6 +129,7 @@ export type ResolversTypes = {
   String: ResolverTypeWrapper<Scalars['String']>;
   List: ResolverTypeWrapper<List>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
+  ListItem: ResolverTypeWrapper<ListItem>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
 };
 
@@ -117,22 +139,33 @@ export type ResolversParentTypes = {
   String: Scalars['String'];
   List: List;
   Int: Scalars['Int'];
+  ListItem: ListItem;
   Boolean: Scalars['Boolean'];
 };
 
 export type ListResolvers<ContextType = any, ParentType extends ResolversParentTypes['List'] = ResolversParentTypes['List']> = {
-  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  items?: Resolver<Maybe<Array<ResolversTypes['ListItem']>>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType>;
+};
+
+export type ListItemResolvers<ContextType = any, ParentType extends ResolversParentTypes['ListItem'] = ResolversParentTypes['ListItem']> = {
+  id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  quantity?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   simple?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   lists?: Resolver<Maybe<Array<ResolversTypes['List']>>, ParentType, ContextType>;
+  list?: Resolver<Maybe<ResolversTypes['List']>, ParentType, ContextType, RequireFields<QueryListArgs, 'id'>>;
 };
 
 export type Resolvers<ContextType = any> = {
   List?: ListResolvers<ContextType>;
+  ListItem?: ListItemResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
 };
 

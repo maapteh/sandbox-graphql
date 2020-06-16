@@ -10,6 +10,15 @@ export const typeDefs = gql`
         Get all the favorite lists this user has made
         """
         lists: [List!]
+        """
+        Get list by id
+        """
+        list(
+            """
+            Id of list
+            """
+            id: Int!
+        ): List
     }
 
     """
@@ -24,5 +33,30 @@ export const typeDefs = gql`
         Description entered by user
         """
         description: String!
+    }
+
+    """
+    Item contained in list
+    """
+    type ListItem {
+        """
+        Id of list item
+        """
+        id: Int
+        """
+        Description of list item
+        """
+        description: String
+        """
+        Amount of list items
+        """
+        quantity: Int!
+    }
+
+    extend type List {
+        """
+        Items contained in list
+        """
+        items: [ListItem!]
     }
 `;
