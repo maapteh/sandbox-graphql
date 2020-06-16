@@ -13,6 +13,15 @@ export type Query = {
   __typename?: 'Query';
   /** Have a simple example */
   simple?: Maybe<Scalars['String']>;
+  /** Show all spacex ships */
+  spacexShips?: Maybe<Array<SpacexShip>>;
+};
+
+/** Spacex ship */
+export type SpacexShip = {
+  __typename?: 'SpacexShip';
+  /** Identification string of the space ship */
+  id?: Maybe<Scalars['ID']>;
 };
 
 
@@ -95,6 +104,8 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 export type ResolversTypes = {
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']>;
+  SpacexShip: ResolverTypeWrapper<SpacexShip>;
+  ID: ResolverTypeWrapper<Scalars['ID']>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
 };
 
@@ -102,15 +113,24 @@ export type ResolversTypes = {
 export type ResolversParentTypes = {
   Query: {};
   String: Scalars['String'];
+  SpacexShip: SpacexShip;
+  ID: Scalars['ID'];
   Boolean: Scalars['Boolean'];
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   simple?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  spacexShips?: Resolver<Maybe<Array<ResolversTypes['SpacexShip']>>, ParentType, ContextType>;
+};
+
+export type SpacexShipResolvers<ContextType = any, ParentType extends ResolversParentTypes['SpacexShip'] = ResolversParentTypes['SpacexShip']> = {
+  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
 export type Resolvers<ContextType = any> = {
   Query?: QueryResolvers<ContextType>;
+  SpacexShip?: SpacexShipResolvers<ContextType>;
 };
 
 

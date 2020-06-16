@@ -6,5 +6,20 @@ export const typeDefs = gql`
         Have a simple example
         """
         simple: String
+
+        """
+        Show all spacex ships
+        """
+        spacexShips: [SpacexShip!]
+    }
+
+    """
+    Spacex ship
+    """
+    type SpacexShip {
+        """
+        Identification string of the space ship
+        """
+        id: ID
     }
 `;

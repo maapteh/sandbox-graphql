@@ -19,6 +19,15 @@ export type Query = {
   __typename?: 'Query';
   /** Have a simple example */
   simple: Maybe<Scalars['String']>;
+  /** Show all spacex ships */
+  spacexShips: Maybe<Array<SpacexShip>>;
+};
+
+/** Spacex ship */
+export type SpacexShip = {
+  __typename?: 'SpacexShip';
+  /** Identification string of the space ship */
+  id: Maybe<Scalars['ID']>;
 };
 
 export type SimpleQueryVariables = {};
