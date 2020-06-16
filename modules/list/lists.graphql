@@ -1,0 +1,6 @@
+query lists {
+    lists {
+        id
+        description
+    }
+}
