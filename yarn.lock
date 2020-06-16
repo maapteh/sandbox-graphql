@@ -3355,6 +3355,11 @@ acorn@^7.1.1:
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-7.2.0.tgz#17ea7e40d7c8640ff54a694c889c26f31704effe"
   integrity sha512-apwXVmYVpQ34m/i71vrApRrRKCWQnZZF1+npOD0WV5xZFfwWOmKGQ2RWlfdy9vWITsenisM8M0Qeq8agcFHNiQ==
 
+add@^2.0.6:
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/add/-/add-2.0.6.tgz#248f0a9f6e5a528ef2295dbeec30532130ae2235"
+  integrity sha1-JI8Kn25aUo7yKV2+7DBTITCuIjU=
+
 adjust-sourcemap-loader@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/adjust-sourcemap-loader/-/adjust-sourcemap-loader-2.0.0.tgz#6471143af75ec02334b219f54bc7970c52fb29a4"
@@ -3739,6 +3744,15 @@ apollo-server-plugin-base@^0.9.0:
   integrity sha512-LWcPrsy2+xqwlNseh/QaGa/MPNopS8c4qGgh0g0cAn0lZBRrJ9Yab7dq+iQ6vdUBwIhUWYN6s9dwUWCZw2SL8g==
   dependencies:
     apollo-server-types "^0.5.0"
+
+apollo-server-plugin-response-cache@^0.5.2:
+  version "0.5.2"
+  resolved "https://registry.yarnpkg.com/apollo-server-plugin-response-cache/-/apollo-server-plugin-response-cache-0.5.2.tgz#d6822ffe381c120109e9d9d6b529b1ee2f311366"
+  integrity sha512-8L4lvTcpxexrwdi+pepGyj7zLAWpbCYKFkc5ZBxvU4hZ30dupCBYdoH31zd/I8/n1iGmos7D6lYpR9s0DWzVMw==
+  dependencies:
+    apollo-cache-control "^0.11.0"
+    apollo-server-caching "^0.5.1"
+    apollo-server-plugin-base "^0.9.0"
 
 apollo-server-types@^0.5.0:
   version "0.5.0"
