@@ -9,7 +9,7 @@ type Query {
 """Launch information"""
 type SpacexLaunch {
   """Launch identification"""
-  id: ID
+  id: ID!
 
   """Collection of image urls"""
   images: [String!]
