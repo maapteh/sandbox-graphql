@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useListItemsLazyQuery } from '../../codegen/_graphql';
+import { useListItemsQuery } from '../../codegen/_graphql';
 import { isListItemRecipe } from './helpers/is-list-item-recipe';
 import { isListItemProduct } from './helpers/is-list-item-product';
 
@@ -20,21 +20,14 @@ const Thumbnail = styled.img`
 `;
 
 export const ListItems: React.FC<{ id: number }> = ({ id }) => {
-    const [loadItems, { data }] = useListItemsLazyQuery();
+    const { data } = useListItemsQuery({
+        variables: {
+            id,
+        },
+    });
 
     return (
         <Container>
-            <button
-                onClick={() => {
-                    loadItems({
-                        variables: {
-                            id,
-                        },
-                    });
-                }}
-            >
-                Load Items
-            </button>
             {data?.list?.items &&
                 data.list.items.length > 0 &&
                 data.list.items.map((item, index) => {
@@ -49,15 +42,17 @@ export const ListItems: React.FC<{ id: number }> = ({ id }) => {
                         );
                     }
 
-                    if (isListItemRecipe(item) && item.description) {
+                    if (isListItemRecipe(item) && item.title) {
                         return (
-                            <Item key={item.id || item.title || index}>
+                            <Item key={item.title}>
                                 {item.quantity}x {item.title}
                                 <br />
                                 {item.description}
                             </Item>
                         );
                     }
+
+                    return null;
                 })}
         </Container>
     );

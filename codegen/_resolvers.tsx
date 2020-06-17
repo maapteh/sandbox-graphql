@@ -58,12 +58,34 @@ export type ListsResult = {
 export type Mutation = {
   __typename?: 'Mutation';
   listRename?: Maybe<List>;
+  /**
+   * Add a product to a favorite list and return the resulting list
+   * Will return null if product or list not found
+   */
+  listAddProduct?: Maybe<List>;
+  /**
+   * Remove a product from a favorite list and return the reuslting list
+   * Will return null if product or list not found
+   */
+  listRemoveProduct?: Maybe<List>;
 };
 
 
 export type MutationListRenameArgs = {
   id: Scalars['Int'];
   description: Scalars['String'];
+};
+
+
+export type MutationListAddProductArgs = {
+  productId: Scalars['Int'];
+  listId: Scalars['Int'];
+};
+
+
+export type MutationListRemoveProductArgs = {
+  productId: Scalars['Int'];
+  listId: Scalars['Int'];
 };
 
 /** A sellable product */
@@ -85,6 +107,11 @@ export type Query = {
   list?: Maybe<List>;
   /** Get a single product */
   product?: Maybe<Product>;
+  /**
+   * "
+   * Get all products
+   */
+  products?: Maybe<Array<Product>>;
 };
 
 
@@ -245,6 +272,8 @@ export type ListsResultResolvers<ContextType = any, ParentType extends Resolvers
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
   listRename?: Resolver<Maybe<ResolversTypes['List']>, ParentType, ContextType, RequireFields<MutationListRenameArgs, 'id' | 'description'>>;
+  listAddProduct?: Resolver<Maybe<ResolversTypes['List']>, ParentType, ContextType, RequireFields<MutationListAddProductArgs, 'productId' | 'listId'>>;
+  listRemoveProduct?: Resolver<Maybe<ResolversTypes['List']>, ParentType, ContextType, RequireFields<MutationListRemoveProductArgs, 'productId' | 'listId'>>;
 };
 
 export type ProductResolvers<ContextType = any, ParentType extends ResolversParentTypes['Product'] = ResolversParentTypes['Product']> = {
@@ -260,6 +289,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   lists?: Resolver<Maybe<ResolversTypes['ListsResult']>, ParentType, ContextType, RequireFields<QueryListsArgs, 'start'>>;
   list?: Resolver<Maybe<ResolversTypes['List']>, ParentType, ContextType, RequireFields<QueryListArgs, 'id'>>;
   product?: Resolver<Maybe<ResolversTypes['Product']>, ParentType, ContextType, RequireFields<QueryProductArgs, 'id'>>;
+  products?: Resolver<Maybe<Array<ResolversTypes['Product']>>, ParentType, ContextType>;
 };
 
 export type Resolvers<ContextType = any> = {

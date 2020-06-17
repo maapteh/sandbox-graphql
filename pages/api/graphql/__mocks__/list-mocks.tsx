@@ -1,5 +1,9 @@
 import { List } from '../../../../codegen/_graphql';
-import { ListsResult, ListItem } from '../../../../codegen/_resolvers';
+import {
+    ListsResult,
+    ListItem,
+    ListItemProduct,
+} from '../../../../codegen/_resolvers';
 
 type ListBase = Omit<List, 'items'>;
 
@@ -127,5 +131,49 @@ export const listService = {
     },
     items(id: number): ListItem[] | null {
         return MOCK_LIST_ITEMS[id] || null;
+    },
+    addProduct(listId: number, productId: number) {
+        const list = MOCK_LISTS.find((x) => x.id === listId);
+
+        if (!list) {
+            return null;
+        }
+
+        const items = MOCK_LIST_ITEMS[listId];
+
+        const alreadyInList = Boolean(items.find((x) => x.id === productId));
+
+        if (alreadyInList) {
+            return list;
+        }
+
+        MOCK_LIST_ITEMS[listId] = [
+            ...items,
+            {
+                id: productId,
+                quantity: 1,
+            } as ListItemProduct,
+        ];
+
+        return list;
+    },
+    removeProduct(listId: number, productId: number) {
+        const list = MOCK_LISTS.find((x) => x.id === listId);
+
+        if (!list) {
+            return null;
+        }
+
+        const items = MOCK_LIST_ITEMS[listId];
+
+        const notInList = !items.find((x) => x.id === productId);
+
+        if (notInList) {
+            return list;
+        }
+
+        MOCK_LIST_ITEMS[listId] = items.filter((x) => x.id !== productId);
+
+        return list;
     },
 };
