@@ -109,7 +109,7 @@ So good, when playground extension is like:
   }
 ```
 
-### Assignment 6: Expose the data in an app
+### Assignment 6: Expose the data in an app (FRONTEND)
 
 When you followed the previous steps (or checkout mpth-spacex-5 when you didnt want to do the server part) you are able to do the following query:
 
@@ -132,6 +132,25 @@ When you followed the previous steps (or checkout mpth-spacex-5 when you didnt w
 Make a new component and expose it on the first page.
 
 <img src="./img/mpth.png" width="400px" />
+
+
+### Assignment 7: Reuse dataloader for retrieving sinlge ship
+
+Now add a single ship query and show us how you would do it. Its simple if you have the dataloader setup in place. Dont think too hard.
+
+Make sure you can do the following query as the end of your coding results
+```
+{
+  spacexShip(id:"5ea6ed2e080df4000697c908") {
+    id
+    info {
+      type
+    }
+  }
+}
+```
+
+So add the query 'spacexShip' to your schema and show us how to resolve.
 
 
 ### Bonus
