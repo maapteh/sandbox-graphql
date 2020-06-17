@@ -12,3 +12,6 @@ generates:
             withHooks: true
             hooksImportFrom: '@apollo/react-hooks'
             avoidOptionals: true
+    codegen/_generated-fragment-types.ts:
+        plugins:
+            - 'fragment-matcher'
