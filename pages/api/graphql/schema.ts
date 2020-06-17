@@ -11,6 +11,12 @@ export const typeDefs = gql`
         Show all spacex ships
         """
         spacexShips: [SpacexShip!] @cacheControl(maxAge: 600, scope: PUBLIC)
+
+        """
+        Give information about a specific ship
+        """
+        spacexShip(id: ID!): SpacexShip
+            @cacheControl(maxAge: 600, scope: PUBLIC)
     }
 
     """

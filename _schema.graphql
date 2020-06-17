@@ -16,6 +16,9 @@ type Query {
 
   """Show all spacex ships"""
   spacexShips: [SpacexShip!]
+
+  """Give information about a specific ship"""
+  spacexShip(id: ID!): SpacexShip
 }
 
 """Launch information"""

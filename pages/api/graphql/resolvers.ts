@@ -28,12 +28,24 @@ export const resolvers: Resolvers = {
                 };
             });
         },
+        // new endpoint, just using same dataloader for the other info
+        spacexShip: (_, { id }, context) => {
+            // TODO: check if id is excitsing else return null
+            return {
+                id,
+            };
+        },
     },
 
     // now info gets information of our dataloader
     SpacexShip: {
-        info: async (ship, _, context) =>
-            context.spacexShipLoader.load(ship.id),
+        info: async (ship, _, context) => {
+            if (ship.id) {
+                return context.spacexShipLoader.load(ship.id);
+            } else {
+                return null;
+            }
+        },
     },
 
     SpacexLaunch: {

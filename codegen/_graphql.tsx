@@ -30,6 +30,13 @@ export type Query = {
   simple: Maybe<Scalars['String']>;
   /** Show all spacex ships */
   spacexShips: Maybe<Array<SpacexShip>>;
+  /** Give information about a specific ship */
+  spacexShip: Maybe<SpacexShip>;
+};
+
+
+export type QuerySpacexShipArgs = {
+  id: Scalars['ID'];
 };
 
 /** Launch information */

@@ -1,5 +1,6 @@
 import { GraphQLResolveInfo } from 'graphql';
 export type Maybe<T> = T | null;
+export type RequireFields<T, K extends keyof T> = { [X in Exclude<keyof T, K>]?: T[X] } & { [P in K]-?: NonNullable<T[P]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -24,6 +25,13 @@ export type Query = {
   simple?: Maybe<Scalars['String']>;
   /** Show all spacex ships */
   spacexShips?: Maybe<Array<SpacexShip>>;
+  /** Give information about a specific ship */
+  spacexShip?: Maybe<SpacexShip>;
+};
+
+
+export type QuerySpacexShipArgs = {
+  id: Scalars['ID'];
 };
 
 /** Launch information */
@@ -165,6 +173,7 @@ export type CacheControlDirectiveResolver<Result, Parent, ContextType = any, Arg
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   simple?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   spacexShips?: Resolver<Maybe<Array<ResolversTypes['SpacexShip']>>, ParentType, ContextType>;
+  spacexShip?: Resolver<Maybe<ResolversTypes['SpacexShip']>, ParentType, ContextType, RequireFields<QuerySpacexShipArgs, 'id'>>;
 };
 
 export type SpacexLaunchResolvers<ContextType = any, ParentType extends ResolversParentTypes['SpacexLaunch'] = ResolversParentTypes['SpacexLaunch']> = {
