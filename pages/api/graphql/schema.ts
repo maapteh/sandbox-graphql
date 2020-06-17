@@ -32,10 +32,25 @@ export const typeDefs = gql`
         Get a single product
         """
         product(id: Int!): Product
+        """
+        "
+        Get all products
+        """
+        products: [Product!]
     }
 
     type Mutation {
         listRename(id: Int!, description: String!): List
+        """
+        Add a product to a favorite list and return the resulting list
+        Will return null if product or list not found
+        """
+        listAddProduct(productId: Int!, listId: Int!): List
+        """
+        Remove a product from a favorite list and return the reuslting list
+        Will return null if product or list not found
+        """
+        listRemoveProduct(productId: Int!, listId: Int!): List
     }
 
     """

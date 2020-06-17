@@ -17,13 +17,6 @@ const MOCK_PRODUCTS: Product[] = [
         description: 'AH Pindakaas naturel',
     },
     {
-        id: 1,
-        price: 0.85,
-        thumbnail:
-            'https://static.ah.nl/image-optimization/static/product/AHI_434d50303338353636_2_200x200_JPG.JPG?options=399,q85',
-        description: 'Halfvolle melk',
-    },
-    {
         id: 3,
         price: 1.66,
         thumbnail:
@@ -78,6 +71,13 @@ const MOCK_PRODUCTS: Product[] = [
         thumbnail:
             'https://static.ah.nl/image-optimization/static/product/AHI_43545239353735383139_2_LowRes_JPG.JPG?options=399,q85',
         description: `Oreo Original koekjes`,
+    },
+    {
+        id: 11,
+        price: 0.85,
+        thumbnail:
+            'https://static.ah.nl/image-optimization/static/product/AHI_434d50303338353636_2_200x200_JPG.JPG?options=399,q85',
+        description: 'Halfvolle melk',
     },
 ];
 

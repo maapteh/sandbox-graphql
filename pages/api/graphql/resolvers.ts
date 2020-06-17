@@ -4,7 +4,7 @@ import {
     ListItemRecipe,
 } from '../../../codegen/_resolvers';
 import { listService } from './__mocks__/list-mocks';
-import { productDataLoader } from './__mocks__/product-mocks';
+import { productDataLoader, productService } from './__mocks__/product-mocks';
 
 export const resolvers: Resolvers = {
     Query: {
@@ -18,12 +18,29 @@ export const resolvers: Resolvers = {
         list: (_, { id }) => {
             return listService.single(id);
         },
+        products: () => {
+            return productService.all();
+        },
     },
     Mutation: {
         listRename: (_, { id, description }) => {
             return listService.patch(id, { description })
                 ? listService.single(id)
                 : null;
+        },
+        listAddProduct: (_, { productId, listId }) => {
+            const product = productService.single(productId);
+            if (!product) {
+                return null;
+            }
+            return listService.addProduct(listId, productId);
+        },
+        listRemoveProduct: (_, { productId, listId }) => {
+            const product = productService.single(productId);
+            if (!product) {
+                return null;
+            }
+            return listService.removeProduct(listId, productId);
         },
     },
     List: {
