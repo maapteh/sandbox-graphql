@@ -4,6 +4,7 @@ import {
     ListItemRecipe,
 } from '../../../codegen/_resolvers';
 import { listService } from './__mocks__/list-mocks';
+import { productDataLoader } from './__mocks__/product-mocks';
 
 export const resolvers: Resolvers = {
     Query: {
@@ -33,6 +34,11 @@ export const resolvers: Resolvers = {
             return (obj as ListItemRecipe).title
                 ? 'ListItemRecipe'
                 : 'ListItemProduct';
+        },
+    },
+    ListItemProduct: {
+        product: (listItem) => {
+            return productDataLoader.load(listItem.id);
         },
     },
 };

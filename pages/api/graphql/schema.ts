@@ -28,6 +28,10 @@ export const typeDefs = gql`
             """
             id: Int!
         ): List
+        """
+        Get a single product
+        """
+        product(id: Int!): Product
     }
 
     type Mutation {
@@ -68,10 +72,6 @@ export const typeDefs = gql`
         """
         id: Int!
         """
-        Product description
-        """
-        description: String!
-        """
         Amount of items in list
         """
         quantity: Int!
@@ -106,5 +106,19 @@ export const typeDefs = gql`
         Items contained in list
         """
         items: [ListItem!]
+    }
+
+    """
+    A sellable product
+    """
+    type Product {
+        id: Int!
+        description: String!
+        thumbnail: String!
+        price: Float!
+    }
+
+    extend type ListItemProduct {
+        product: Product
     }
 `;

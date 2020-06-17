@@ -4,8 +4,13 @@ query listItems($id: Int!) {
         items {
             ... on ListItemProduct {
                 id
-                description
                 quantity
+                product {
+                    id
+                    description
+                    price
+                    thumbnail
+                }
             }
             ... on ListItemRecipe {
                 id

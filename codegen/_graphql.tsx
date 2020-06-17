@@ -33,8 +33,7 @@ export type ListItemProduct = {
   __typename?: 'ListItemProduct';
   /** Id of product */
   id: Scalars['Int'];
-  /** Product description */
-  description: Scalars['String'];
+  product: Maybe<Product>;
   /** Amount of items in list */
   quantity: Scalars['Int'];
 };
@@ -71,6 +70,15 @@ export type MutationListRenameArgs = {
   description: Scalars['String'];
 };
 
+/** A sellable product */
+export type Product = {
+  __typename?: 'Product';
+  id: Scalars['Int'];
+  description: Scalars['String'];
+  thumbnail: Scalars['String'];
+  price: Scalars['Float'];
+};
+
 export type Query = {
   __typename?: 'Query';
   /** Have a simple example */
@@ -79,6 +87,8 @@ export type Query = {
   lists: Maybe<ListsResult>;
   /** Get list by id */
   list: Maybe<List>;
+  /** Get a single product */
+  product: Maybe<Product>;
 };
 
 
@@ -89,6 +99,11 @@ export type QueryListsArgs = {
 
 
 export type QueryListArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type QueryProductArgs = {
   id: Scalars['Int'];
 };
 
@@ -109,7 +124,11 @@ export type ListItemsQuery = (
     & Pick<List, 'id'>
     & { items: Maybe<Array<(
       { __typename?: 'ListItemProduct' }
-      & Pick<ListItemProduct, 'id' | 'description' | 'quantity'>
+      & Pick<ListItemProduct, 'id' | 'quantity'>
+      & { product: Maybe<(
+        { __typename?: 'Product' }
+        & Pick<Product, 'id' | 'description' | 'price' | 'thumbnail'>
+      )> }
     ) | (
       { __typename?: 'ListItemRecipe' }
       & Pick<ListItemRecipe, 'id' | 'title' | 'description' | 'quantity'>
@@ -170,8 +189,13 @@ export const ListItemsDocument = gql`
     items {
       ... on ListItemProduct {
         id
-        description
         quantity
+        product {
+          id
+          description
+          price
+          thumbnail
+        }
       }
       ... on ListItemRecipe {
         id

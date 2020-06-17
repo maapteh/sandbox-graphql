@@ -16,9 +16,7 @@ union ListItem = ListItemProduct | ListItemRecipe
 type ListItemProduct {
   """Id of product"""
   id: Int!
-
-  """Product description"""
-  description: String!
+  product: Product
 
   """Amount of items in list"""
   quantity: Int!
@@ -51,6 +49,14 @@ type Mutation {
   listRename(id: Int!, description: String!): List
 }
 
+"""A sellable product"""
+type Product {
+  id: Int!
+  description: String!
+  thumbnail: String!
+  price: Float!
+}
+
 type Query {
   """Have a simple example"""
   simple: String
@@ -69,4 +75,7 @@ type Query {
     """Id of list"""
     id: Int!
   ): List
+
+  """Get a single product"""
+  product(id: Int!): Product
 }
