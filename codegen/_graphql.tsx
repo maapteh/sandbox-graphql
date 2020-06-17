@@ -36,7 +36,7 @@ export type Query = {
 export type SpacexLaunch = {
   __typename?: 'SpacexLaunch';
   /** Launch identification */
-  id: Maybe<Scalars['ID']>;
+  id: Scalars['ID'];
   /** Collection of image urls */
   images: Maybe<Array<Scalars['String']>>;
 };

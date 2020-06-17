@@ -55,13 +55,12 @@ export const typeDefs = gql`
         """
         Launch identification
         """
-        id: ID
+        id: ID!
         """
         Collection of image urls
         """
         images: [String!]
     }
-
 
     """
     cache control
