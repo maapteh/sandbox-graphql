@@ -62,7 +62,7 @@
     "scripts": {
         "---- app locally ----": "-------------------------",
         "development": "yarn dev",
-        "dev": "concurrently 'yarn codegen:client -w' 'yarn codegen:server -w' 'yarn next' -n 'codegen:client,codegen:server,nextjs' -c 'gray,gray,magenta'",
+        "dev": "concurrently \"yarn codegen:client -w\" \"yarn codegen:server -w\" \"yarn next\" -n \"codegen:client,codegen:server,nextjs\" -c \"gray,gray,magenta\"",
         "dev:secure": "concurrently 'yarn codegen:client -w' 'yarn codegen:server -w' 'node server.js' -n 'codegen:client,codegen:server,nextjs' -c 'gray,gray,magenta'",
         "dev:inspect": "concurrently 'yarn codegen:client -w' 'yarn codegen:server -w' 'yarn next:inspect' -n 'codegen:client,codegen:server,nextjs' -c 'gray,gray,magenta'",
         "next": "next dev --port=3007",
