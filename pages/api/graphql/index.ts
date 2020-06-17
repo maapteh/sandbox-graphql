@@ -7,7 +7,7 @@ const Dataloader = require('dataloader');
 
 const apolloServer = new ApolloServer({
     typeDefs,
-    resolvers,
+    resolvers: resolvers as any,
     debug: false,
 });
 
