@@ -29,8 +29,7 @@ export type ListItemProduct = {
   __typename?: 'ListItemProduct';
   /** Id of product */
   id: Scalars['Int'];
-  /** Product description */
-  description: Scalars['String'];
+  product?: Maybe<Product>;
   /** Amount of items in list */
   quantity: Scalars['Int'];
 };
@@ -67,6 +66,15 @@ export type MutationListRenameArgs = {
   description: Scalars['String'];
 };
 
+/** A sellable product */
+export type Product = {
+  __typename?: 'Product';
+  id: Scalars['Int'];
+  description: Scalars['String'];
+  thumbnail: Scalars['String'];
+  price: Scalars['Float'];
+};
+
 export type Query = {
   __typename?: 'Query';
   /** Have a simple example */
@@ -75,6 +83,8 @@ export type Query = {
   lists?: Maybe<ListsResult>;
   /** Get list by id */
   list?: Maybe<List>;
+  /** Get a single product */
+  product?: Maybe<Product>;
 };
 
 
@@ -85,6 +95,11 @@ export type QueryListsArgs = {
 
 
 export type QueryListArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type QueryProductArgs = {
   id: Scalars['Int'];
 };
 
@@ -173,6 +188,8 @@ export type ResolversTypes = {
   List: ResolverTypeWrapper<Omit<List, 'items'> & { items?: Maybe<Array<ResolversTypes['ListItem']>> }>;
   ListItem: ResolversTypes['ListItemProduct'] | ResolversTypes['ListItemRecipe'];
   ListItemProduct: ResolverTypeWrapper<ListItemProduct>;
+  Product: ResolverTypeWrapper<Product>;
+  Float: ResolverTypeWrapper<Scalars['Float']>;
   ListItemRecipe: ResolverTypeWrapper<ListItemRecipe>;
   Mutation: ResolverTypeWrapper<{}>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
@@ -187,6 +204,8 @@ export type ResolversParentTypes = {
   List: Omit<List, 'items'> & { items?: Maybe<Array<ResolversParentTypes['ListItem']>> };
   ListItem: ResolversParentTypes['ListItemProduct'] | ResolversParentTypes['ListItemRecipe'];
   ListItemProduct: ListItemProduct;
+  Product: Product;
+  Float: Scalars['Float'];
   ListItemRecipe: ListItemRecipe;
   Mutation: {};
   Boolean: Scalars['Boolean'];
@@ -205,7 +224,7 @@ export type ListItemResolvers<ContextType = any, ParentType extends ResolversPar
 
 export type ListItemProductResolvers<ContextType = any, ParentType extends ResolversParentTypes['ListItemProduct'] = ResolversParentTypes['ListItemProduct']> = {
   id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  product?: Resolver<Maybe<ResolversTypes['Product']>, ParentType, ContextType>;
   quantity?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
@@ -228,10 +247,19 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   listRename?: Resolver<Maybe<ResolversTypes['List']>, ParentType, ContextType, RequireFields<MutationListRenameArgs, 'id' | 'description'>>;
 };
 
+export type ProductResolvers<ContextType = any, ParentType extends ResolversParentTypes['Product'] = ResolversParentTypes['Product']> = {
+  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  thumbnail?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  price?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType>;
+};
+
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   simple?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   lists?: Resolver<Maybe<ResolversTypes['ListsResult']>, ParentType, ContextType, RequireFields<QueryListsArgs, 'start'>>;
   list?: Resolver<Maybe<ResolversTypes['List']>, ParentType, ContextType, RequireFields<QueryListArgs, 'id'>>;
+  product?: Resolver<Maybe<ResolversTypes['Product']>, ParentType, ContextType, RequireFields<QueryProductArgs, 'id'>>;
 };
 
 export type Resolvers<ContextType = any> = {
@@ -241,6 +269,7 @@ export type Resolvers<ContextType = any> = {
   ListItemRecipe?: ListItemRecipeResolvers<ContextType>;
   ListsResult?: ListsResultResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
+  Product?: ProductResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
 };
 

@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useListItemsLazyQuery } from '../../codegen/_graphql';
 import { isListItemRecipe } from './helpers/is-list-item-recipe';
+import { isListItemProduct } from './helpers/is-list-item-product';
 
 const Container = styled.div`
     margin-top: 16px;
@@ -11,6 +12,11 @@ const Item = styled.div`
     padding: 8px;
     margin: 24px;
     border: 1px solid #eee;
+`;
+
+const Thumbnail = styled.img`
+    width: 64px;
+    height: 64px;
 `;
 
 export const ListItems: React.FC<{ id: number }> = ({ id }) => {
@@ -32,15 +38,18 @@ export const ListItems: React.FC<{ id: number }> = ({ id }) => {
             {data?.list?.items &&
                 data.list.items.length > 0 &&
                 data.list.items.map((item, index) => {
-                    if (item.__typename === 'ListItemProduct') {
+                    if (isListItemProduct(item) && item.product) {
                         return (
-                            <Item key={item.id || item.description || index}>
-                                {item.quantity}x {item.description}
+                            <Item key={item.id || item.product.description}>
+                                <Thumbnail src={item.product.thumbnail} />
+                                <br />
+                                {item.quantity}x {item.product.description} @ €
+                                {item.product.price}
                             </Item>
                         );
                     }
 
-                    if (isListItemRecipe(item)) {
+                    if (isListItemRecipe(item) && item.description) {
                         return (
                             <Item key={item.id || item.title || index}>
                                 {item.quantity}x {item.title}
@@ -49,8 +58,6 @@ export const ListItems: React.FC<{ id: number }> = ({ id }) => {
                             </Item>
                         );
                     }
-
-                    return null;
                 })}
         </Container>
     );
