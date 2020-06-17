@@ -12,6 +12,7 @@ import { onError } from 'apollo-link-error';
 import { HttpLink } from 'apollo-link-http';
 
 import { toIdValue } from 'apollo-utilities';
+import { fragmentMatcher } from './fragment-matcher';
 
 import { version, name } from '../package.json';
 
@@ -165,6 +166,31 @@ function initApolloClient(initialState = undefined) {
 }
 
 function createApolloClient(initialState = {}) {
+    const isClientSide = typeof window !== 'undefined';
+
+    // Create the cache first, which we'll share across Apollo tooling.
+    // This is an in-memory cache. Since we'll be calling `createClient` on
+    // universally, the cache will survive until the HTTP request is
+    // responded to (on the server) or for the whole of the user's visit (in
+    // the browser)
+    const cache = new InMemoryCache({
+        fragmentMatcher,
+        // addTypename: false FIXME: find out how to get cache working while not retrieving all __typename
+        cacheRedirects: {
+            Query: {
+                // Here we can map the data we get in list view with the one for detail view
+                // see: https://www.apollographql.com/docs/react/performance/performance/
+            },
+        },
+    });
+
+    // If we're in the browser, we'd have received initial state from the
+    // server. Restore it, so the client app can continue with the same data.
+    let currentCache;
+    if (isClientSide) {
+        currentCache = cache.restore((window as any).__APOLLO_STATE__);
+    }
+
     return new ApolloClient({
         name,
         version,
@@ -186,7 +212,7 @@ function createApolloClient(initialState = {}) {
                 batchHttpLink as any, // otherwise, batching is fine
             ),
         ]),
-        cache: cache.restore(initialState),
+        cache: currentCache || cache,
         defaultOptions: {
             query: {
                 errorPolicy: 'all',
