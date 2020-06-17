@@ -26,7 +26,7 @@ export type Query = {
 /** Launch information */
 export type SpacexLaunch = {
   __typename?: 'SpacexLaunch';
-  id: Maybe<Scalars['ID']>;
+  id: Scalars['ID'];
 };
 
 /** Spacex ship */

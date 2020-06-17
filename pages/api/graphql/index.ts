@@ -21,33 +21,33 @@ const apolloServer = new ApolloServer({
                 // retrieve its information and give it back in same id's order
                 // be sure when no information it should return null
                 const collection = await Promise.all(
-                    ids.map(async id => {
+                    ids.map(async (id) => {
                         const response = await fetch(
                             `https://api.spacexdata.com/v4/ships/${id}`,
                         );
-    
+
                         if (response.status < 200 || response.status >= 300) {
                             // TODO: also fill up error
                             return null;
                         }
-    
+
                         const data = await response.json();
-    
+
                         if (!data) {
                             return null;
                         }
-    
+
                         return {
                             type: data.type,
                             image: data.image,
                             launches: data.launches.map((id: string) => {
                                 return {
-                                    id
-                                }
-                            })
-                        }
-                    })
-                )
+                                    id,
+                                };
+                            }),
+                        };
+                    }),
+                );
 
                 return collection;
             }),

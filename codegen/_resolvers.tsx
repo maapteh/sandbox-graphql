@@ -20,7 +20,7 @@ export type Query = {
 /** Launch information */
 export type SpacexLaunch = {
   __typename?: 'SpacexLaunch';
-  id?: Maybe<Scalars['ID']>;
+  id: Scalars['ID'];
 };
 
 /** Spacex ship */
@@ -147,7 +147,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
 };
 
 export type SpacexLaunchResolvers<ContextType = any, ParentType extends ResolversParentTypes['SpacexLaunch'] = ResolversParentTypes['SpacexLaunch']> = {
-  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
