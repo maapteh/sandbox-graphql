@@ -1,4 +1,8 @@
-import { Resolvers } from '../../../codegen/_resolvers';
+import {
+    Resolvers,
+    ListItem,
+    ListItemRecipe,
+} from '../../../codegen/_resolvers';
 import { listService } from './__mocks__/list-mocks';
 
 export const resolvers: Resolvers = {
@@ -22,17 +26,13 @@ export const resolvers: Resolvers = {
         },
     },
     List: {
-        items: (list) => [
-            {
-                id: 1,
-                description: 'Cheese',
-                quantity: 2,
-            },
-            {
-                id: 2,
-                description: 'Milk',
-                quantity: 1,
-            },
-        ],
+        items: (list) => listService.items(list.id),
+    },
+    ListItem: {
+        __resolveType(obj: ListItem) {
+            return (obj as ListItemRecipe).title
+                ? 'ListItemRecipe'
+                : 'ListItemProduct';
+        },
     },
 };

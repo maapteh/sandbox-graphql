@@ -27,13 +27,27 @@ export type List = {
 };
 
 /** Item contained in list */
-export type ListItem = {
-  __typename?: 'ListItem';
-  /** Id of list item */
-  id: Maybe<Scalars['Int']>;
-  /** Description of list item */
-  description: Maybe<Scalars['String']>;
-  /** Amount of list items */
+export type ListItem = ListItemProduct | ListItemRecipe;
+
+export type ListItemProduct = {
+  __typename?: 'ListItemProduct';
+  /** Id of product */
+  id: Scalars['Int'];
+  /** Product description */
+  description: Scalars['String'];
+  /** Amount of items in list */
+  quantity: Scalars['Int'];
+};
+
+export type ListItemRecipe = {
+  __typename?: 'ListItemRecipe';
+  /** Id of recipe */
+  id: Scalars['Int'];
+  /** Title of recipe */
+  title: Scalars['String'];
+  /** Description of recipe */
+  description: Scalars['String'];
+  /** Amount of items in list */
   quantity: Scalars['Int'];
 };
 
@@ -92,9 +106,13 @@ export type ListItemsQuery = (
   { __typename?: 'Query' }
   & { list: Maybe<(
     { __typename?: 'List' }
+    & Pick<List, 'id'>
     & { items: Maybe<Array<(
-      { __typename?: 'ListItem' }
-      & Pick<ListItem, 'id' | 'description' | 'quantity'>
+      { __typename?: 'ListItemProduct' }
+      & Pick<ListItemProduct, 'id' | 'description' | 'quantity'>
+    ) | (
+      { __typename?: 'ListItemRecipe' }
+      & Pick<ListItemRecipe, 'id' | 'title' | 'description' | 'quantity'>
     )>> }
   )> }
 );
@@ -148,10 +166,19 @@ export const ListFragmentDoc = gql`
 export const ListItemsDocument = gql`
     query listItems($id: Int!) {
   list(id: $id) {
+    id
     items {
-      id
-      description
-      quantity
+      ... on ListItemProduct {
+        id
+        description
+        quantity
+      }
+      ... on ListItemRecipe {
+        id
+        title
+        description
+        quantity
+      }
     }
   }
 }

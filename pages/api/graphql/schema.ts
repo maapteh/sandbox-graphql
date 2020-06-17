@@ -62,23 +62,44 @@ export const typeDefs = gql`
         description: String!
     }
 
-    """
-    Item contained in list
-    """
-    type ListItem {
+    type ListItemProduct {
         """
-        Id of list item
+        Id of product
         """
-        id: Int
+        id: Int!
         """
-        Description of list item
+        Product description
         """
-        description: String
+        description: String!
         """
-        Amount of list items
+        Amount of items in list
         """
         quantity: Int!
     }
+
+    type ListItemRecipe {
+        """
+        Id of recipe
+        """
+        id: Int!
+        """
+        Title of recipe
+        """
+        title: String!
+        """
+        Description of recipe
+        """
+        description: String!
+        """
+        Amount of items in list
+        """
+        quantity: Int!
+    }
+
+    """
+    Item contained in list
+    """
+    union ListItem = ListItemProduct | ListItemRecipe
 
     extend type List {
         """
