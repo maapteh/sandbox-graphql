@@ -78,6 +78,11 @@ export type QueryListArgs = {
   id: Scalars['Int'];
 };
 
+export type ListFragment = (
+  { __typename?: 'List' }
+  & Pick<List, 'id' | 'description'>
+);
+
 export type ListItemsQueryVariables = {
   id: Scalars['Int'];
 };
@@ -121,7 +126,7 @@ export type ListsQuery = (
     & Pick<ListsResult, 'total'>
     & { result: Maybe<Array<(
       { __typename?: 'List' }
-      & Pick<List, 'id' | 'description'>
+      & ListFragment
     )>> }
   )> }
 );
@@ -134,7 +139,12 @@ export type SimpleQuery = (
   & Pick<Query, 'simple'>
 );
 
-
+export const ListFragmentDoc = gql`
+    fragment list on List {
+  id
+  description
+}
+    `;
 export const ListItemsDocument = gql`
     query listItems($id: Int!) {
   list(id: $id) {
@@ -248,13 +258,12 @@ export const ListsDocument = gql`
     query lists($start: Int!, $size: Int) {
   lists(start: $start, size: $size) {
     result {
-      id
-      description
+      ...list
     }
     total
   }
 }
-    `;
+    ${ListFragmentDoc}`;
 export type ListsComponentProps = Omit<ApolloReactComponents.QueryComponentOptions<ListsQuery, ListsQueryVariables>, 'query'> & ({ variables: ListsQueryVariables; skip?: boolean; } | { skip: boolean; });
 
     export const ListsComponent = (props: ListsComponentProps) => (

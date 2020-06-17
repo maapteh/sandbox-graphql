@@ -1,8 +1,7 @@
 query lists($start: Int!, $size: Int) {
     lists(start: $start, size: $size) {
         result {
-            id
-            description
+            ...list
         }
         total
     }
