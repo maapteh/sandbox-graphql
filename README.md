@@ -16,8 +16,11 @@
 
 ## Development
 
--   `yarn dev`, after it runs in other proces run `yarn test:watch`
--   goto [http://localhost:3000/](http://localhost:3000/) (playground at [http://localhost:3000/api/graphql](http://localhost:3000/api/graphql))
+-   `yarn dev` (optional: after it run in other proces `yarn test:watch`)
+-   goto [http://localhost:3007/](http://localhost:3007/) (playground at [http://localhost:3007/api/graphql](http://localhost:3007/api/graphql))
+
+_In the future when you want to have the possibility to run on https for your frontend part (or having hsts problems) you can run `yarn dev:secure`, then the app is available at https://localhost for this assignments it is not needes we will only connect with https on the server part._
+
 
 ## Workshop
 
