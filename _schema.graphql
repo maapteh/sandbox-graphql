@@ -21,7 +21,7 @@ type Query {
 """Launch information"""
 type SpacexLaunch {
   """Launch identification"""
-  id: ID
+  id: ID!
 
   """Collection of image urls"""
   images: [String!]
@@ -30,7 +30,7 @@ type SpacexLaunch {
 """Spacex ship"""
 type SpacexShip {
   """Identification string of the space ship"""
-  id: ID
+  id: ID!
 
   """Basic ship information"""
   info: SpacexShipInfo

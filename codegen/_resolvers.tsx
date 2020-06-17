@@ -30,7 +30,7 @@ export type Query = {
 export type SpacexLaunch = {
   __typename?: 'SpacexLaunch';
   /** Launch identification */
-  id?: Maybe<Scalars['ID']>;
+  id: Scalars['ID'];
   /** Collection of image urls */
   images?: Maybe<Array<Scalars['String']>>;
 };
@@ -39,7 +39,7 @@ export type SpacexLaunch = {
 export type SpacexShip = {
   __typename?: 'SpacexShip';
   /** Identification string of the space ship */
-  id?: Maybe<Scalars['ID']>;
+  id: Scalars['ID'];
   /** Basic ship information */
   info?: Maybe<SpacexShipInfo>;
 };
@@ -168,13 +168,13 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
 };
 
 export type SpacexLaunchResolvers<ContextType = any, ParentType extends ResolversParentTypes['SpacexLaunch'] = ResolversParentTypes['SpacexLaunch']> = {
-  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   images?: Resolver<Maybe<Array<ResolversTypes['String']>>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
 export type SpacexShipResolvers<ContextType = any, ParentType extends ResolversParentTypes['SpacexShip'] = ResolversParentTypes['SpacexShip']> = {
-  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   info?: Resolver<Maybe<ResolversTypes['SpacexShipInfo']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };

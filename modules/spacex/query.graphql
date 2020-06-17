@@ -1,0 +1,13 @@
+query spacexShips {
+  spacexShips {
+    id
+    info {
+      type
+      image
+      launches {
+        id
+        images
+      }
+    }
+  }
+}

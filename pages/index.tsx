@@ -1,11 +1,11 @@
 import { NextPage } from 'next';
 import { withApollo } from '../lib/apollo';
-import { Simple } from '../modules/simple/simple';
+import { Spacex } from '../modules/spacex/spacex';
 
 const IndexPage: NextPage = () => {
     return (
         <>
-            <Simple />
+            <Spacex />
         </>
     );
 };

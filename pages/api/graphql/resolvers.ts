@@ -22,20 +22,22 @@ export const resolvers: Resolvers = {
                 return null;
             }
 
-            return data.ships.map((ship: string) => { 
+            return data.ships.map((ship: string) => {
                 return {
                     id: ship,
-                }
+                };
             });
-        }
+        },
     },
 
     // now info gets information of our dataloader
     SpacexShip: {
-        info: async (ship, _, context) => context.spacexShipLoader.load(ship.id)
+        info: async (ship, _, context) =>
+            context.spacexShipLoader.load(ship.id),
     },
 
     SpacexLaunch: {
-        images: async (ship, _, context) => context.spacexLaunchLoader.load(ship.id)
+        images: async (ship, _, context) =>
+            context.spacexLaunchLoader.load(ship.id),
     },
 };

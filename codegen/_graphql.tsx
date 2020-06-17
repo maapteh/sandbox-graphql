@@ -36,7 +36,7 @@ export type Query = {
 export type SpacexLaunch = {
   __typename?: 'SpacexLaunch';
   /** Launch identification */
-  id: Maybe<Scalars['ID']>;
+  id: Scalars['ID'];
   /** Collection of image urls */
   images: Maybe<Array<Scalars['String']>>;
 };
@@ -45,7 +45,7 @@ export type SpacexLaunch = {
 export type SpacexShip = {
   __typename?: 'SpacexShip';
   /** Identification string of the space ship */
-  id: Maybe<Scalars['ID']>;
+  id: Scalars['ID'];
   /** Basic ship information */
   info: Maybe<SpacexShipInfo>;
 };
@@ -67,6 +67,25 @@ export type SimpleQueryVariables = {};
 export type SimpleQuery = (
   { __typename?: 'Query' }
   & Pick<Query, 'simple'>
+);
+
+export type SpacexShipsQueryVariables = {};
+
+
+export type SpacexShipsQuery = (
+  { __typename?: 'Query' }
+  & { spacexShips: Maybe<Array<(
+    { __typename?: 'SpacexShip' }
+    & Pick<SpacexShip, 'id'>
+    & { info: Maybe<(
+      { __typename?: 'SpacexShipInfo' }
+      & Pick<SpacexShipInfo, 'type' | 'image'>
+      & { launches: Maybe<Array<(
+        { __typename?: 'SpacexLaunch' }
+        & Pick<SpacexLaunch, 'id' | 'images'>
+      )>> }
+    )> }
+  )>> }
 );
 
 
@@ -119,3 +138,62 @@ export function useSimpleLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookO
 export type SimpleQueryHookResult = ReturnType<typeof useSimpleQuery>;
 export type SimpleLazyQueryHookResult = ReturnType<typeof useSimpleLazyQuery>;
 export type SimpleQueryResult = ApolloReactCommon.QueryResult<SimpleQuery, SimpleQueryVariables>;
+export const SpacexShipsDocument = gql`
+    query spacexShips {
+  spacexShips {
+    id
+    info {
+      type
+      image
+      launches {
+        id
+        images
+      }
+    }
+  }
+}
+    `;
+export type SpacexShipsComponentProps = Omit<ApolloReactComponents.QueryComponentOptions<SpacexShipsQuery, SpacexShipsQueryVariables>, 'query'>;
+
+    export const SpacexShipsComponent = (props: SpacexShipsComponentProps) => (
+      <ApolloReactComponents.Query<SpacexShipsQuery, SpacexShipsQueryVariables> query={SpacexShipsDocument} {...props} />
+    );
+    
+export type SpacexShipsProps<TChildProps = {}, TDataName extends string = 'data'> = {
+      [key in TDataName]: ApolloReactHoc.DataValue<SpacexShipsQuery, SpacexShipsQueryVariables>
+    } & TChildProps;
+export function withSpacexShips<TProps, TChildProps = {}, TDataName extends string = 'data'>(operationOptions?: ApolloReactHoc.OperationOption<
+  TProps,
+  SpacexShipsQuery,
+  SpacexShipsQueryVariables,
+  SpacexShipsProps<TChildProps, TDataName>>) {
+    return ApolloReactHoc.withQuery<TProps, SpacexShipsQuery, SpacexShipsQueryVariables, SpacexShipsProps<TChildProps, TDataName>>(SpacexShipsDocument, {
+      alias: 'spacexShips',
+      ...operationOptions
+    });
+};
+
+/**
+ * __useSpacexShipsQuery__
+ *
+ * To run a query within a React component, call `useSpacexShipsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSpacexShipsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSpacexShipsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useSpacexShipsQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<SpacexShipsQuery, SpacexShipsQueryVariables>) {
+        return ApolloReactHooks.useQuery<SpacexShipsQuery, SpacexShipsQueryVariables>(SpacexShipsDocument, baseOptions);
+      }
+export function useSpacexShipsLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<SpacexShipsQuery, SpacexShipsQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<SpacexShipsQuery, SpacexShipsQueryVariables>(SpacexShipsDocument, baseOptions);
+        }
+export type SpacexShipsQueryHookResult = ReturnType<typeof useSpacexShipsQuery>;
+export type SpacexShipsLazyQueryHookResult = ReturnType<typeof useSpacexShipsLazyQuery>;
+export type SpacexShipsQueryResult = ApolloReactCommon.QueryResult<SpacexShipsQuery, SpacexShipsQueryVariables>;
