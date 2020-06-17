@@ -1,5 +1,6 @@
 import { GraphQLResolveInfo } from 'graphql';
 export type Maybe<T> = T | null;
+export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 export type RequireFields<T, K extends keyof T> = { [X in Exclude<keyof T, K>]?: T[X] } & { [P in K]-?: NonNullable<T[P]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
@@ -22,13 +23,27 @@ export type List = {
 };
 
 /** Item contained in list */
-export type ListItem = {
-  __typename?: 'ListItem';
-  /** Id of list item */
-  id?: Maybe<Scalars['Int']>;
-  /** Description of list item */
-  description?: Maybe<Scalars['String']>;
-  /** Amount of list items */
+export type ListItem = ListItemProduct | ListItemRecipe;
+
+export type ListItemProduct = {
+  __typename?: 'ListItemProduct';
+  /** Id of product */
+  id: Scalars['Int'];
+  /** Product description */
+  description: Scalars['String'];
+  /** Amount of items in list */
+  quantity: Scalars['Int'];
+};
+
+export type ListItemRecipe = {
+  __typename?: 'ListItemRecipe';
+  /** Id of recipe */
+  id: Scalars['Int'];
+  /** Title of recipe */
+  title: Scalars['String'];
+  /** Description of recipe */
+  description: Scalars['String'];
+  /** Amount of items in list */
   quantity: Scalars['Int'];
 };
 
@@ -155,8 +170,10 @@ export type ResolversTypes = {
   String: ResolverTypeWrapper<Scalars['String']>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
   ListsResult: ResolverTypeWrapper<ListsResult>;
-  List: ResolverTypeWrapper<List>;
-  ListItem: ResolverTypeWrapper<ListItem>;
+  List: ResolverTypeWrapper<Omit<List, 'items'> & { items?: Maybe<Array<ResolversTypes['ListItem']>> }>;
+  ListItem: ResolversTypes['ListItemProduct'] | ResolversTypes['ListItemRecipe'];
+  ListItemProduct: ResolverTypeWrapper<ListItemProduct>;
+  ListItemRecipe: ResolverTypeWrapper<ListItemRecipe>;
   Mutation: ResolverTypeWrapper<{}>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
 };
@@ -167,8 +184,10 @@ export type ResolversParentTypes = {
   String: Scalars['String'];
   Int: Scalars['Int'];
   ListsResult: ListsResult;
-  List: List;
-  ListItem: ListItem;
+  List: Omit<List, 'items'> & { items?: Maybe<Array<ResolversParentTypes['ListItem']>> };
+  ListItem: ResolversParentTypes['ListItemProduct'] | ResolversParentTypes['ListItemRecipe'];
+  ListItemProduct: ListItemProduct;
+  ListItemRecipe: ListItemRecipe;
   Mutation: {};
   Boolean: Scalars['Boolean'];
 };
@@ -181,8 +200,20 @@ export type ListResolvers<ContextType = any, ParentType extends ResolversParentT
 };
 
 export type ListItemResolvers<ContextType = any, ParentType extends ResolversParentTypes['ListItem'] = ResolversParentTypes['ListItem']> = {
-  id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __resolveType: TypeResolveFn<'ListItemProduct' | 'ListItemRecipe', ParentType, ContextType>;
+};
+
+export type ListItemProductResolvers<ContextType = any, ParentType extends ResolversParentTypes['ListItemProduct'] = ResolversParentTypes['ListItemProduct']> = {
+  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  quantity?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType>;
+};
+
+export type ListItemRecipeResolvers<ContextType = any, ParentType extends ResolversParentTypes['ListItemRecipe'] = ResolversParentTypes['ListItemRecipe']> = {
+  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   quantity?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
@@ -205,7 +236,9 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
 
 export type Resolvers<ContextType = any> = {
   List?: ListResolvers<ContextType>;
-  ListItem?: ListItemResolvers<ContextType>;
+  ListItem?: ListItemResolvers;
+  ListItemProduct?: ListItemProductResolvers<ContextType>;
+  ListItemRecipe?: ListItemRecipeResolvers<ContextType>;
   ListsResult?: ListsResultResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;

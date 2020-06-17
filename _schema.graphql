@@ -11,14 +11,30 @@ type List {
 }
 
 """Item contained in list"""
-type ListItem {
-  """Id of list item"""
-  id: Int
+union ListItem = ListItemProduct | ListItemRecipe
 
-  """Description of list item"""
-  description: String
+type ListItemProduct {
+  """Id of product"""
+  id: Int!
 
-  """Amount of list items"""
+  """Product description"""
+  description: String!
+
+  """Amount of items in list"""
+  quantity: Int!
+}
+
+type ListItemRecipe {
+  """Id of recipe"""
+  id: Int!
+
+  """Title of recipe"""
+  title: String!
+
+  """Description of recipe"""
+  description: String!
+
+  """Amount of items in list"""
   quantity: Int!
 }
 
