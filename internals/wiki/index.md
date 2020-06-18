@@ -57,7 +57,7 @@ You should already have the following:
    [Frontend]  
    Re-usable components using Fragments
 
-9. [Union Types](./9-union-types.md)  
+9. [Union Types](./09-union-types.md)  
    [Frontend, Backend]  
    How to use union types
 
