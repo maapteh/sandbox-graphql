@@ -1,12 +1,36 @@
 # Setting up your development environment
 
-This part is optional, you can use your own development environment and tools.
+Make sure you have installed [NodeJS 10 or 12](https://nodejs.org/en/download/) and [Yarn](https://classic.yarnpkg.com/lang/en/). And that you can run the following commands from your terminal:
 
-The development environment described here is the most commonly used one and the one we recommend.
+```sh
+yarn -v
+node -v
+```
 
-1. Download and install [Visual Studio Code](https://code.visualstudio.com/) together with the [GraphQL plugin](https://marketplace.visualstudio.com/items?itemName=Prisma.vscode-graphql).
-1. Clone the [repository](https://kkhoshnoodpour@scm.ecom.ahold.nl/stash/scm/~maarten.van.oudenniel/sandbox-graphql.git).
-1. Run `yarn` from the root folder of the cloned folder
-1. Open the cloned folder using VSCode
+You can use your own code editor. The most used ones are:
 
-Now we're all set!
+-   [VSCode](https://code.visualstudio.com/)
+-   [WebStorm](https://www.jetbrains.com/webstorm/download/#section=windows) (paid with 30-day trial)
+
+Both also have GraphQL plugins that you can use. For these tutorial these are optional:
+
+-   [VSCode plugin](https://marketplace.visualstudio.com/items?itemName=Prisma.vscode-graphql)
+-   [WebStorm plugin](https://marketplace.visualstudio.com/items?itemName=Prisma.vscode-graphql).
+
+Next clone the repository
+
+```sh
+git clone https://@scm.ecom.ahold.nl/stash/scm/~maarten.van.oudenniel/sandbox-graphql.git
+```
+
+Install all dependencies using yarn
+
+```sh
+yarn
+```
+
+Now we can run the application
+
+```
+yarn dev
+```
