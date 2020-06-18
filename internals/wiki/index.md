@@ -85,7 +85,7 @@ You should already have the following:
 
 ### Projects
 
-15. [SpaceX App](./15-spacex-app.md)  
+15. [SpaceX App](./mpth-spacex.md)  
     [Frontend, Backend]  
     In this project we build an app using the SpaceX API. This project is mostly backend related.
 
