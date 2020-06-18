@@ -1,6 +1,7 @@
 # Chapter 3: Server Side Rendering
 
-> [Frontend]
+> [Frontend]  
+> Continues from branch `chapter-2-solution`
 
 In the previous chapter we connected to GraphQL and showed the data in our application. What might not be obvious, is that we're performing the query server-side. The component is rendered on the server and the entire HTML including our component is returned.
 

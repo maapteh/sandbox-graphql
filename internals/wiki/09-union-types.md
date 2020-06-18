@@ -1,7 +1,6 @@
 # Chapter 9: Union Types
 
-> [Frontend, Backend]
-
+> [Frontend, Backend]  
 > Continues from branch `chapter-8-solution`
 
 In this chapter we will go through the use cases for `unions` and how to implement them in our GraphQL schema. The Union type indicates that a field can return more than one object type, but doesn't define specific fields itself.

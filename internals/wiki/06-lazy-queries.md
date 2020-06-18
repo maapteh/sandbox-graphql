@@ -1,6 +1,7 @@
 ## Chapter 6: Lazy queries
 
-> [Frontend]
+> [Frontend]  
+> Continues from `chapter-5-solution`
 
 In the previous chapters we used query hooks to get our data from GraphQL. In all our cases we retrieved the data immediatly on page load.
 

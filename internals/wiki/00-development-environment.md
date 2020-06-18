@@ -9,4 +9,4 @@ The development environment described here is the most commonly used one and the
 1. Run `yarn` from the root folder of the cloned folder
 1. Open the cloned folder using VSCode
 
-Now we're all set to use GraphQL!
+Now we're all set!

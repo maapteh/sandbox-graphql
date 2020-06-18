@@ -1,6 +1,7 @@
 # Chapter 7: Mutations
 
-> [Frontend, Backend]
+> [Frontend, Backend]  
+> Continues from `chapter-6-solution`
 
 So far we've learned how to display data from our GraphQL API. In this chapter we're going to learn how to change or update our data using GraphQL.
 

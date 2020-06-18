@@ -1,6 +1,7 @@
 # Chapter 2 - Calling GraphQL from React
 
-> [Frontend]
+> [Frontend]  
+> Continues from branch `chapter-1-solution`
 
 In this chapter we'll use the GraphQL query we defined in chapter 1 and display it in our React application.
 
@@ -49,7 +50,7 @@ export const MyComponent: React.FC = () => {
 };
 ```
 
-Now we can the generated React hook imported from `schema/graphql.tsx` to connect to GraphQL:
+Now we can import the generated React hook imported from `schema/graphql.tsx` to connect to GraphQL:
 
 ```ts
 import { useMyQuery } from '../../codegen/_graphql';
@@ -74,7 +75,7 @@ if (error) {
 }
 
 if (!data || !data.queryName) {
-    return <p>Erorr: Unknown</p>;
+    return <p>Erorr: Not Found</p>;
 }
 
 return; // do something with the data
@@ -180,7 +181,7 @@ export const ListOverview: React.FC = () => {
     }
 
     if (!data || !data.lists) {
-        return <p>Erorr: Unknown</p>;
+        return <p>Erorr: Not Found</p>;
     }
 
     // and tells us when we really have data

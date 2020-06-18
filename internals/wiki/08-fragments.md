@@ -1,7 +1,6 @@
 # Chapter 8: Fragments
 
-> [Frontend]
-
+> [Frontend]  
 > Continues from branch `chapter-7-solution`
 
 A common best practice is to split React components into separate stateless and stateful components, also referred to as dumb and smart components. So far we've been building stateful components: The component handles both data fetching as well as styling. There are a few ways we can split our components while still using the GraphQL type system.
