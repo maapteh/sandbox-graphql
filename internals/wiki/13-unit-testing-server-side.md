@@ -1,7 +1,7 @@
 # Chapter 13 - Unit testing GraphQL
 
-> [Backend, Test]
-> Starts at branch `chapter-13`
+> [Backend, Test]  
+> Continues from branch `chapter-12-solution`
 
 > Note this chapter starts at the branch `chapter-13` because we have to make a few changes before we can implement our test: Jest mocks don't work well with plain objects, so we moved the list-service to it's own file under `pages/api/graphql/services/list-service.ts`
 

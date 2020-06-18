@@ -1,6 +1,6 @@
 ## Chapter 4: Project - COVID app
 
-> [Backend, Frontend]
+> [Backend, Frontend]  
 > Continue from branch `master`
 
 In this chapter we're going to use what we learned so far to build a covid app.

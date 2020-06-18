@@ -1,7 +1,7 @@
 # Chapter 14: Integration testing
 
-> [Test]
-> Continue from any branch
+> [Test]  
+> Continue from branch `chapter-13-solution`
 
 An important part of testing are integration or e2e tests. For our GraphQL API we can define these using Postman or any other HTTP testing tool.
 

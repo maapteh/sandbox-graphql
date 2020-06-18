@@ -1,7 +1,6 @@
 # Chapter 11: Advanced GraphQL
 
-> [Frontend, Backend]
-
+> [Frontend, Backend]  
 > Continues from branch `chapter-10-solutions`
 
 This chapter provides an overview of more advanced GraphQL features.

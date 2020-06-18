@@ -1,6 +1,7 @@
 # Chapter 10: Dataloader
 
-> [Backend]
+> [Backend]  
+> Continues from `chapter-9-solution`
 
 With Dataloader we can make our API more efficient by batching and grouping calls together on field resolver level.
 

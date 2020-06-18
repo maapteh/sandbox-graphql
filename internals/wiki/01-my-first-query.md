@@ -1,6 +1,7 @@
 # Chapter 1: My first query
 
-> [Frontend, Backend]
+> [Frontend, Backend]  
+> Continues from branch `master`
 
 In this assignment we're going to add a new query that we can use in our application. We do this by:
 

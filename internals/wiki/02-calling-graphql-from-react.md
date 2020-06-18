@@ -1,6 +1,7 @@
 # Chapter 2 - Calling GraphQL from React
 
-> [Frontend]
+> [Frontend]  
+> Continues from branch `chapter-1-solution`
 
 In this chapter we'll use the GraphQL query we defined in chapter 1 and display it in our React application.
 

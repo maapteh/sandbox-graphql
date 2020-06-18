@@ -1,14 +1,18 @@
-# GraphQL Workshop
+# GraphQL Workshop Tutorial
 
-Welcome to the GraphQL tutorial. This purpose of this tutorial is to get you up and running with GraphQL. And to introduce the most important concepts of implementing GraphQL and using it in applications.
+Welcome to the tutorial accompanying the GraphQL workshop. This purpose of this tutorial is to get you up and running with GraphQL andnd to introduce the most important concepts of using GraphQL.
 
-In this tutorial you'll build a small application from the ground up. Each chapter has one ore more assignments, and they conclude with possible solutions.
+There are 3 parts to this tutorial:
+
+-   Fundamentals: Chapters with assignments to step-by-step build a GraphQL api and web application, including solutions
+-   Testing: Explains 3 possible testing strategies
+-   Final Project: A final assignment to build a SpaceX application, including solutions
 
 To get the most out of this workshop we recommend solving the assignments on your own, and using the solutions as comparison or if you're really stuck . The workshop presentation together with the information in the chapters contain everything you need to solve the assignments.
 
-If you can't solve the assignments, we still encourage you to follow along and learn about GraphQL by reviewing the chapter solutions.
+Some programming experience in C-style languages (JS, TS, Java, etc.) is required. In this tutorial we use TypesScript, we try to explain the syntax and keep it simple as we go along. But you might have to lookup a TypeScript API if certain code looks unfamiliar.
 
-Each chapter builds on the previous, so you can start at any chapter by checking out the solution branch of the previous chapter.
+If you get stuck or can't solve an assignment, we still encourage you to follow along and learn about GraphQL by reviewing the chapter solutions.
 
 ## Pre-requisties
 
@@ -16,14 +20,18 @@ You should already have the following:
 
 -   Installed [NodeJS 10 or 12](https://nodejs.org/en/download/)
 -   Installed [Yarn](https://classic.yarnpkg.com/lang/en/)
--   Access to [BitBucket](https://shotor.com)
+-   Access to [BitBucket](https://scm.ecom.ahold.nl/stash/users/maarten.van.oudenniel/repos/sandbox-graphql/browse)
 
 ## Contents
 
 -   [Setting up your development environment](./00-development-environment.md)
 -   [More information about this codebase and the GraphQL setup](./setup/index.md)
 
-### Tutorial
+### Fundamentals
+
+A step-by-step or standalone guide to build a GraphQL API and web application. It's possible to start at any chapter. Each chapter contains assignments that are free to implement however you'd like. As a more guided track you can follow the solutions where we build a favorites list app.
+
+You can also start with the projects and use the fundamentals guide as a reference. Chapter 4 is a project to build a Covid tracking application, and in the final project we build a SpaceX application.
 
 1. [My first query](./01-my-first-query.md)  
    [Frontend, Backend]  
@@ -71,6 +79,8 @@ You should already have the following:
 
 ### Testing
 
+There are 3 parts to testing GraphQL. In these chapters we take a close look at all the strategies.
+
 12. [Unit Testing Client Side](./12-unit-testing-client-side.md)  
     [Frontend, Test]  
     How to unit test GraphQL powered components
@@ -85,6 +95,6 @@ You should already have the following:
 
 ### Final Project
 
-15. [SpaceX App](./mpth-spacex.md)  
+15. [SpaceX App](./15-spacex-app.md)  
     [Frontend, Backend]  
-    In this project we build an app using the SpaceX API. This project is mostly backend related.
+    In this project we build an app using the SpaceX API.

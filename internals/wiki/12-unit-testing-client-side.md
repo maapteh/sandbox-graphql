@@ -1,6 +1,6 @@
 ## Chapter 12: Unit testing web app
 
-> [Frontend, Test]
+> [Frontend, Test]  
 > Continues from `chapter-11-solution`
 
 `apollo` provides testing utilities to test our React components using GraphQL by using mocks.

@@ -1,8 +1,7 @@
 # Chapter 5: Paging
 
-> [Frontend, Backend]
-
-Resume from `chapter-3-solutions`
+> [Frontend, Backend]  
+> Continues from `chapter-3-solutions`
 
 In this chapter we add paging to our query. There are many ways to implement paging in an API. The most common ones are to either use a `page` or an `offset`. Or if you're really cool, you'll use a `cursor`. The following section explains the first two paging schemes. If you already know how to implement paging in API's, you can skip this section and start at the first assignment of the chapter.
 
