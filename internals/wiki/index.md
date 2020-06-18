@@ -14,6 +14,10 @@ Some programming experience in C-style languages (JS, TS, Java, etc.) is require
 
 If you get stuck or can't solve an assignment, we still encourage you to follow along and learn about GraphQL by reviewing the chapter solutions.
 
+We have also created a ["GraphQL Workshop"](https://teams.microsoft.com/l/channel/19%3afa394fa727b14ac6b348fc5782da4d38%40thread.skype/GraphQL%2520Workshop?groupId=0064192e-9977-4bbb-a354-0ccc6c80dde8&tenantId=a6b169f1-592b-4329-8f33-8db8903003c7) Teams channel where you can ask questions about the workshop or anything GraphQL related.
+
+Let's start with the tutorial!
+
 ## Pre-requisties
 
 You should already have the following:
