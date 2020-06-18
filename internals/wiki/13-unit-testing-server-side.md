@@ -1,55 +1,58 @@
 # Chapter 13 - Unit testing GraphQL
 
 > [Backend, Test]
+> Starts at branch `chapter-13`
 
-[#TODO: Update this list]
+> Note this chapter starts at the branch `chapter-13` because we have to make a few changes before we can implement our test: Jest mocks don't work well with plain objects, so we moved the list-service to it's own file under `pages/api/graphql/services/list-service.ts`
 
--   Error flow
--   Keeping mocks up to date
--   Unit test query including error and null states
+In this chapter we're going to write unit test for our queries on the API side.
 
-To unit test GraphQL APIs we use mocks using utilities provided by `apollo`.
+To unit test GraphQL APIs we use mocks using utilities provided by `apollo`, and the `jest` library.
 
-[#TODO: Update imports and test]
+We can write tests for our queries by using the `execute` function from `graphql`. The most basic test looks like this:
 
 ```ts
+import gql from 'graphql-tag';
 import { execute } from 'graphql/execution/execute';
-import { schema } from ''
+import { makeExecutableSchema } from 'apollo-server-micro';
+import { typeDefs } from '../schema';
+import { resolvers } from '../resolvers';
+import { ServiceUsedByResolver } from '../service-used-by-resolver';
+jest.mock('../service-used-by-resolver');
 
-// note: you might have to mock services you're using inside the resolvers
-jest.mock('path/to/my-service', () => {
-    return {
-        MyService: jest.fn().mockImplementation(() => {
-            return MyServiceMock;
-        }),
-    };
-});
+describe('list query', () => {
+    const schema = makeExecutableSchema({
+        typeDefs,
+        resolvers: {
+            Query: resolvers.Query as any,
+        },
+    });
 
-describe('my-query', () => {
-    it('performs query', () => {
-        // we define a query on-the-fly and execute it against the implemented resolvers.
-        const result = await execute({
+    it('calls list service', () => {
+        execute({
             schema,
-            {
-                id: 9001
+            variableValues: {
+                search: 1,
             },
             document: gql`
-                query myQuery($id: Int!) {
-                    myQuery(id: $id) {
+                query myQuery($search: String!) {
+                    myQuery(search: $search) {
                         id
                     }
                 }
             `,
         });
 
-        // perform assertions on the result
+        const mockCall = (ServiceUsedByResolver as any).mock.instances[0].single
+            .mock.calls[0];
+        expect(mockCall).toEqual([1]);
     });
 });
 ```
 
 ## Assignment 13.1: Implement a unit test
 
-To complete this chapter implement a unit test in the GraphQL API on a query or mutation.
+Modify the example above and implement a unit test on your own queries or mutations.
 
 # Chapter 13 - Solution
 
@@ -59,50 +62,43 @@ Branch `chapter-13-solution`
 
 For our lists query we implement a unit test to check whether our service is correctly called
 
-[#TODO: Update imports and test]
+`pages/api/graphql/test/list.query.test.ts`
 
 ```ts
+import gql from 'graphql-tag';
 import { execute } from 'graphql/execution/execute';
-import { schema } from ''
+import { makeExecutableSchema } from 'apollo-server-micro';
+import { typeDefs } from '../schema';
+import { resolvers } from '../resolvers';
+import { ListService } from '../list-service';
+jest.mock('../list-service');
 
-const listServiceAll = jest.fn()
-
-jest.mock('path/to/my-service', () => {
-    return {
-        ListService: jest.fn().mockImplementation(() => {
-            return {
-                all: listServiceAll
-            };
-        }),
-    };
-});
-
-describe('lists query', () => {
-    beforeEach(() => {
-        jest.clearAllMocks();
+describe('list query', () => {
+    const schema = makeExecutableSchema({
+        typeDefs,
+        resolvers: {
+            Query: resolvers.Query as any,
+        },
     });
 
     it('calls list service', () => {
-        const result = await execute({
+        execute({
             schema,
-            {
-                start: 0,
-                size: 5
+            variableValues: {
+                id: 1,
             },
             document: gql`
-                query lists($start: Int!, size: Int) {
-                    lists(start: $start, size: $size) {
-                        result {
-                            description
-                        }
+                query list($id: Int!) {
+                    list(id: $id) {
+                        id
                     }
                 }
             `,
         });
 
-        expect(listServiceAll).toBeCalledWith([0, 5]);
-        expect(result.lists).toBeDefined();
-        expect(result.lists.length).toBeGreaterThan(0);
+        const mockCall = (ListService as any).mock.instances[0].single.mock
+            .calls[0];
+        expect(mockCall).toEqual([1]);
     });
 });
 ```

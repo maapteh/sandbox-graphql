@@ -1,11 +1,7 @@
 # Chapter 14: Integration testing
 
 > [Test]
-
-[#TODO: This list]
-
--   Integration test resolver
--   Postman collection
+> Continue from any branch
 
 An important part of testing are integration or e2e tests. For our GraphQL API we can define these using Postman or any other HTTP testing tool.
 
@@ -39,6 +35,4 @@ Branch `chapter-14-solution`
 
 ## Assignment 14.1 - Solution: Implement an integration test
 
-[#TODO: implement postman collection]
-
-See postman collection in `tests/postman`.
+See postman collection in `tests`.
