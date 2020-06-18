@@ -122,7 +122,7 @@ const MyPage: NextPage = () => {
 export default withApollo(MyPage);
 ```
 
-You can now see your page, component and hopefully your data from GraphQL at <http://localhost:3000/my-page>.
+You can now see your page, component and hopefully your data from GraphQL at <http://localhost:3007/my-page>.
 
 # Chapter 2 - Solution: Calling GraphQL from React
 
@@ -211,4 +211,4 @@ const ListsPage: NextPage = () => {
 export default withApollo(ListsPage);
 ```
 
-Now we can go to <http://localhost:3000/favorites> and see all the users favorite lists in a nice box.
+Now we can go to <http://localhost:3007/favorites> and see all the users favorite lists in a nice box.
