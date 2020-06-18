@@ -75,7 +75,7 @@ You can also start with the projects and use the fundamentals guide as a referen
 
 10. [Dataloader](./10-dataloader.md)  
     [Backend]  
-    Make your API efficient #TODO
+    Make your API efficient
 
 11. [Advanced GraphQL](./11-advanced-graphql.md)  
     [Frontend, Backend]  
