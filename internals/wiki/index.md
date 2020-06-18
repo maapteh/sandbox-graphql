@@ -37,7 +37,7 @@ You should already have the following:
    [Frontend]  
    Configuring Server Side Rendering
 
-4. [Covid App](./04-covid-app.md)  
+4. [Project - Covid App](./04-covid-app.md)  
    [Frontend, Backend]  
    Real world example of connecting to a service to build a covid app
 
@@ -83,12 +83,8 @@ You should already have the following:
     [Test]  
     How to run integration tests on GraphQL API's
 
-### Projects
+### Final Project
 
 15. [SpaceX App](./mpth-spacex.md)  
     [Frontend, Backend]  
     In this project we build an app using the SpaceX API. This project is mostly backend related.
-
-16. [Undefined App](./16-undefined-app.md)  
-    [Frontend, Backend]  
-    In this project we build an undefined app.
