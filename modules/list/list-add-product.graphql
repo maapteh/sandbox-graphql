@@ -1,0 +1,5 @@
+mutation listAddProduct($productId: Int!, $listId: Int!) {
+    listAddProduct(productId: $productId, listId: $listId) {
+        id
+    }
+}

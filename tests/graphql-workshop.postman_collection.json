@@ -1,0 +1,78 @@
+{
+	"info": {
+		"_postman_id": "664665ce-cae0-48cc-9567-462f93463622",
+		"name": "graphql-workshop",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "list",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b5fcff58-f96c-495f-a542-2e08c4ef76d1",
+						"exec": [
+							"var result = pm.response.json()",
+							"pm.expect(result.data.list.id).to.eq(1)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "{\n  list(id: 1) {\n    id\n  }\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "lists",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ef7dc9dd-e0fb-450d-9df0-e5da81c3176d",
+						"exec": [
+							"var result = pm.response.json()",
+							"pm.expect(result.data.lists.result.length).to.eq(3)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "{\n  lists(start: 0, size: 3) {\n    result {\n      id\n    }\n    total\n  }\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
