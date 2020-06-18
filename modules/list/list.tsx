@@ -15,13 +15,17 @@ const Anchor = styled.a`
     margin-left: 8px;
 `;
 
-export const List: React.FC<ListFragment> = ({ id, description }) => {
+type Props = ListFragment & {
+    testId?: string;
+};
+
+export const List: React.FC<Props> = ({ id, description, testId }) => {
     const [newDescription, setNewDescription] = useState(description);
     const [selected, setSelected] = useState(false);
     const [rename] = useListRenameMutation();
 
     return (
-        <Container key={id}>
+        <Container key={id} data-testid={testId}>
             {!selected && description}
             {selected && (
                 <>
