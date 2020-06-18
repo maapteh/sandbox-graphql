@@ -19,7 +19,7 @@ export const ListOverview: React.FC = () => {
     }
 
     if (error) {
-        return <p>Error: {error}</p>;
+        return <p data-testid="error">Error {JSON.stringify(error)}</p>;
     }
 
     return (
@@ -29,6 +29,7 @@ export const ListOverview: React.FC = () => {
                     key={id || description}
                     id={id}
                     description={description}
+                    testId={`list-${id}`}
                 />
             ))}
 
