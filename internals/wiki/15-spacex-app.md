@@ -113,7 +113,7 @@ So good, when playground extension is like:
 
 ### Assignment 6: Expose the data in an app (FRONTEND)
 
-When you followed the previous steps (or checkout mpth-spacex-5 when you didnt want to do the server part) you are able to do the following query:
+When you followed the previous steps (or checkout spacex-solution-5 when you didnt want to do the server part) you are able to do the following query:
 
 ```
 {
@@ -133,7 +133,7 @@ When you followed the previous steps (or checkout mpth-spacex-5 when you didnt w
 
 Make a new component and expose it on the first page.
 
-<img src="./img/mpth.png" width="400px" />
+<img src="./img/spacex.png" width="400px" />
 
 ### Assignment 7: Reuse dataloader for retrieving sinlge ship
 
