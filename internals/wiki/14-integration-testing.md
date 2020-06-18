@@ -20,7 +20,7 @@ This could of course also be a mutation.
 To illustrate using `cURL`:
 
 ```sh
-curl --location --request POST 'http://localhost:3000/api/graphql' \
+curl --location --request POST 'http://localhost:3007/api/graphql' \
 --header 'Content-Type: application/json' \
 --data-raw '{ "query": "query myQuery(\$id: id) { myQuery { myData } }" }'
 ```

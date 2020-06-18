@@ -74,7 +74,7 @@ export const resolvers: Resolvers = {
 
 ## Assignment 9.3: Display the list items in your frontend
 
-Now you should be able to run your union query in the GraphQL playground environment: http://localhost:3000/api/graphql.
+Now you should be able to run your union query in the GraphQL playground environment: http://localhost:3007/api/graphql.
 
 You can test it with different id's (1 = product, 3 = recipe ).
 

@@ -54,7 +54,7 @@ Add the missing query, using the exact same name used as in the `schema.ts` file
 
 ## Assignment 1.3: Run your query in the playground
 
-Now you should be able to run your query in the GraphQL playground environment: <http://localhost:3000/api/graphql>.
+Now you should be able to run your query in the GraphQL playground environment: <http://localhost:3007/api/graphql>.
 
 > The playground provides an environment to test queries. It includes auto-complete, as you start typing it will provide suggestions. Click on the `schema` button on the right to see the entire schema.
 
@@ -141,7 +141,7 @@ const query: QueryResolvers = {
 
 Now we can query the fields on type **List** from the playground, using the **lists** query.
 
-<http://localhost:3000/api/graphql>:
+<http://localhost:3007/api/graphql>:
 
 ```graphql
 {

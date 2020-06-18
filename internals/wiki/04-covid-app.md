@@ -1,6 +1,7 @@
 ## Chapter 4: Project - COVID app
 
 > [Backend, Frontend]
+> Continue from branch `master`
 
 In this chapter we're going to use what we learned so far to build a covid app.
 
@@ -8,7 +9,7 @@ We're going to implement a GraphQL API using the Novel COVID open API at https:/
 
 We're going to use the endpoint: `https://disease.sh/v2/historical?lastdays=10`
 
-### 4.1 Assignment: Figure out what this endpoint provides
+### Assignment 4.1: Figure out what this endpoint provides
 
 First we look in the swagger at Responses where you can find the schema/model it provides:
 
@@ -31,7 +32,7 @@ The schema is important to think about, since you will find out you can't take i
 
 Create a schema based on the swagger definition. Then place this schema in `./pages/graphql/schema.ts`. Expose it via the query name `covidHistorical` under the Query part.
 
-### 4.2 Assignment: Now expose the data in the form you schematised
+### Assignment 4.2: Now expose the data in the form you schematised
 
 Almost there, now we have to fetch the actual data and resolve this. Add the 'covidHistorical' resolver in `./pages/graphql/resolver.ts` and fetch the async data and now normalise this data so it matches your schema!
 
@@ -39,7 +40,7 @@ Almost there, now we have to fetch the actual data and resolve this. Add the 'co
 const response = await fetch('https://disease.sh/v2/historical?lastdays=10');
 ```
 
-Its time to code, and at same time maybe look at http://localhost:3000/api/graphql to debug on the fly. Its also possible to run the app in debug mode, stop current one and then run `yarn dev:inspect`.
+Its time to code, and at same time maybe look at http://localhost:3007/api/graphql to debug on the fly. Its also possible to run the app in debug mode, stop current one and then run `yarn dev:inspect`.
 
 After you exposed the data, you will find out that not every field is how you expected it to be. Also it happens that after exposing the data the schema you defined may not be so smart (for example repetition of data). So its common you adjust in this phase. It also happens when exposing more then one consumer. Think more, less problems on the long run.
 
@@ -54,3 +55,17 @@ When you are done, run `yarn schema:linter`
 The end result can be something like:
 
 <img src="./img/4-result.png" width="400px" />
+
+## Chapter 4 - Solution: Project - COVID app
+
+### Assignment Solutions
+
+For the assignment solutions see branch `chapter-4-solution`
+
+### Bonus Assignment Solutions
+
+For the bonus assignment solutions see branches
+
+-   `chapter-4-bonus-1`
+-   `chapter-4-bonus-2`
+-   `chapter-4-bonus-3`
