@@ -412,7 +412,7 @@ mutation listAddProduct($productId: Int!, $listId: Int!) {
 }
 ```
 
-Then everything it works. But this is inefficient: Why do we need to get all this data, when we're only interested in ListItemProduct? And from that we only care about the id and quantity. Because we already have the product. So no need to query that again.
+Then it works. But this is inefficient: Why do we need to get all this data, when we're only interested in ListItemProduct? And from that we only care about the id and quantity. Because we already have the product. So no need to query that again.
 
 We can make this nicer by updating the cache ourselves.
 
