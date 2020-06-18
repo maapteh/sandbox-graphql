@@ -3,8 +3,10 @@ import {
     ListItem,
     ListItemRecipe,
 } from '../../../codegen/_resolvers';
-import { listService } from './__mocks__/list-mocks';
 import { productDataLoader, productService } from './__mocks__/product-mocks';
+import { ListService } from './services/list-service';
+
+const listService = new ListService();
 
 export const resolvers: Resolvers = {
     Query: {
