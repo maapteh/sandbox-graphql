@@ -12,7 +12,20 @@
       }
       const result: IntrospectionResultData = {
   "__schema": {
-    "types": []
+    "types": [
+      {
+        "kind": "UNION",
+        "name": "ListItem",
+        "possibleTypes": [
+          {
+            "name": "ListItemProduct"
+          },
+          {
+            "name": "ListItemRecipe"
+          }
+        ]
+      }
+    ]
   }
 };
       export default result;

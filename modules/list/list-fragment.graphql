@@ -1,0 +1,4 @@
+fragment list on List {
+    id
+    description
+}

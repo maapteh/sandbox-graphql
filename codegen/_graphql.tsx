@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
-import * as React from 'react';
 import * as ApolloReactCommon from '@apollo/react-common';
+import * as React from 'react';
 import * as ApolloReactComponents from '@apollo/react-components';
 import * as ApolloReactHoc from '@apollo/react-hoc';
 import * as ApolloReactHooks from '@apollo/react-hooks';
@@ -15,11 +15,224 @@ export type Scalars = {
   Float: number;
 };
 
+/** Favorite list */
+export type List = {
+  __typename?: 'List';
+  /** Description entered by user */
+  description: Scalars['String'];
+  /** Id of list */
+  id: Scalars['Int'];
+  /** Items contained in list */
+  items: Maybe<Array<ListItem>>;
+};
+
+/** Item contained in list */
+export type ListItem = ListItemProduct | ListItemRecipe;
+
+export type ListItemProduct = {
+  __typename?: 'ListItemProduct';
+  /** Id of product */
+  id: Scalars['Int'];
+  product: Maybe<Product>;
+  /** Amount of items in list */
+  quantity: Scalars['Int'];
+};
+
+export type ListItemRecipe = {
+  __typename?: 'ListItemRecipe';
+  /** Id of recipe */
+  id: Scalars['Int'];
+  /** Title of recipe */
+  title: Scalars['String'];
+  /** Description of recipe */
+  description: Scalars['String'];
+  /** Amount of items in list */
+  quantity: Scalars['Int'];
+};
+
+/** Paged result of lists query */
+export type ListsResult = {
+  __typename?: 'ListsResult';
+  /** Paged collection */
+  result: Maybe<Array<List>>;
+  /** Total amount of items in collection */
+  total: Scalars['Int'];
+};
+
+export type Mutation = {
+  __typename?: 'Mutation';
+  listRename: Maybe<List>;
+  /**
+   * Add a product to a favorite list and return the resulting list
+   * Will return null if product or list not found
+   */
+  listAddProduct: Maybe<List>;
+  /**
+   * Remove a product from a favorite list and return the reuslting list
+   * Will return null if product or list not found
+   */
+  listRemoveProduct: Maybe<List>;
+};
+
+
+export type MutationListRenameArgs = {
+  id: Scalars['Int'];
+  description: Scalars['String'];
+};
+
+
+export type MutationListAddProductArgs = {
+  productId: Scalars['Int'];
+  listId: Scalars['Int'];
+};
+
+
+export type MutationListRemoveProductArgs = {
+  productId: Scalars['Int'];
+  listId: Scalars['Int'];
+};
+
+/** A sellable product */
+export type Product = {
+  __typename?: 'Product';
+  id: Scalars['Int'];
+  description: Scalars['String'];
+  thumbnail: Scalars['String'];
+  price: Scalars['Float'];
+};
+
 export type Query = {
   __typename?: 'Query';
   /** Have a simple example */
   simple: Maybe<Scalars['String']>;
+  /** Get all the favorite lists this user has made */
+  lists: Maybe<ListsResult>;
+  /** Get list by id */
+  list: Maybe<List>;
+  /** Get a single product */
+  product: Maybe<Product>;
+  /**
+   * "
+   * Get all products
+   */
+  products: Maybe<Array<Product>>;
 };
+
+
+export type QueryListsArgs = {
+  start: Scalars['Int'];
+  size: Maybe<Scalars['Int']>;
+};
+
+
+export type QueryListArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type QueryProductArgs = {
+  id: Scalars['Int'];
+};
+
+export type ListAddProductMutationVariables = {
+  productId: Scalars['Int'];
+  listId: Scalars['Int'];
+};
+
+
+export type ListAddProductMutation = (
+  { __typename?: 'Mutation' }
+  & { listAddProduct: Maybe<(
+    { __typename?: 'List' }
+    & Pick<List, 'id'>
+  )> }
+);
+
+export type ListFragment = (
+  { __typename?: 'List' }
+  & Pick<List, 'id' | 'description'>
+);
+
+export type ListItemsQueryVariables = {
+  id: Scalars['Int'];
+};
+
+
+export type ListItemsQuery = (
+  { __typename?: 'Query' }
+  & { list: Maybe<(
+    { __typename?: 'List' }
+    & Pick<List, 'id'>
+    & { items: Maybe<Array<(
+      { __typename?: 'ListItemProduct' }
+      & Pick<ListItemProduct, 'id' | 'quantity'>
+      & { product: Maybe<(
+        { __typename?: 'Product' }
+        & Pick<Product, 'id' | 'description' | 'price' | 'thumbnail'>
+      )> }
+    ) | (
+      { __typename?: 'ListItemRecipe' }
+      & Pick<ListItemRecipe, 'id' | 'title' | 'description' | 'quantity'>
+    )>> }
+  )> }
+);
+
+export type ListRemoveProductMutationVariables = {
+  productId: Scalars['Int'];
+  listId: Scalars['Int'];
+};
+
+
+export type ListRemoveProductMutation = (
+  { __typename?: 'Mutation' }
+  & { listRemoveProduct: Maybe<(
+    { __typename?: 'List' }
+    & Pick<List, 'id' | 'description'>
+  )> }
+);
+
+export type ListRenameMutationVariables = {
+  id: Scalars['Int'];
+  description: Scalars['String'];
+};
+
+
+export type ListRenameMutation = (
+  { __typename?: 'Mutation' }
+  & { listRename: Maybe<(
+    { __typename?: 'List' }
+    & Pick<List, 'id' | 'description'>
+  )> }
+);
+
+export type ListsQueryVariables = {
+  start: Scalars['Int'];
+  size: Maybe<Scalars['Int']>;
+};
+
+
+export type ListsQuery = (
+  { __typename?: 'Query' }
+  & { lists: Maybe<(
+    { __typename?: 'ListsResult' }
+    & Pick<ListsResult, 'total'>
+    & { result: Maybe<Array<(
+      { __typename?: 'List' }
+      & ListFragment
+    )>> }
+  )> }
+);
+
+export type ProductsQueryVariables = {};
+
+
+export type ProductsQuery = (
+  { __typename?: 'Query' }
+  & { products: Maybe<Array<(
+    { __typename?: 'Product' }
+    & Pick<Product, 'id' | 'price' | 'thumbnail' | 'description'>
+  )>> }
+);
 
 export type SimpleQueryVariables = {};
 
@@ -29,7 +242,350 @@ export type SimpleQuery = (
   & Pick<Query, 'simple'>
 );
 
+export const ListFragmentDoc = gql`
+    fragment list on List {
+  id
+  description
+}
+    `;
+export const ListAddProductDocument = gql`
+    mutation listAddProduct($productId: Int!, $listId: Int!) {
+  listAddProduct(productId: $productId, listId: $listId) {
+    id
+  }
+}
+    `;
+export type ListAddProductMutationFn = ApolloReactCommon.MutationFunction<ListAddProductMutation, ListAddProductMutationVariables>;
+export type ListAddProductComponentProps = Omit<ApolloReactComponents.MutationComponentOptions<ListAddProductMutation, ListAddProductMutationVariables>, 'mutation'>;
 
+    export const ListAddProductComponent = (props: ListAddProductComponentProps) => (
+      <ApolloReactComponents.Mutation<ListAddProductMutation, ListAddProductMutationVariables> mutation={ListAddProductDocument} {...props} />
+    );
+    
+export type ListAddProductProps<TChildProps = {}, TDataName extends string = 'mutate'> = {
+      [key in TDataName]: ApolloReactCommon.MutationFunction<ListAddProductMutation, ListAddProductMutationVariables>
+    } & TChildProps;
+export function withListAddProduct<TProps, TChildProps = {}, TDataName extends string = 'mutate'>(operationOptions?: ApolloReactHoc.OperationOption<
+  TProps,
+  ListAddProductMutation,
+  ListAddProductMutationVariables,
+  ListAddProductProps<TChildProps, TDataName>>) {
+    return ApolloReactHoc.withMutation<TProps, ListAddProductMutation, ListAddProductMutationVariables, ListAddProductProps<TChildProps, TDataName>>(ListAddProductDocument, {
+      alias: 'listAddProduct',
+      ...operationOptions
+    });
+};
+
+/**
+ * __useListAddProductMutation__
+ *
+ * To run a mutation, you first call `useListAddProductMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useListAddProductMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [listAddProductMutation, { data, loading, error }] = useListAddProductMutation({
+ *   variables: {
+ *      productId: // value for 'productId'
+ *      listId: // value for 'listId'
+ *   },
+ * });
+ */
+export function useListAddProductMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<ListAddProductMutation, ListAddProductMutationVariables>) {
+        return ApolloReactHooks.useMutation<ListAddProductMutation, ListAddProductMutationVariables>(ListAddProductDocument, baseOptions);
+      }
+export type ListAddProductMutationHookResult = ReturnType<typeof useListAddProductMutation>;
+export type ListAddProductMutationResult = ApolloReactCommon.MutationResult<ListAddProductMutation>;
+export type ListAddProductMutationOptions = ApolloReactCommon.BaseMutationOptions<ListAddProductMutation, ListAddProductMutationVariables>;
+export const ListItemsDocument = gql`
+    query listItems($id: Int!) {
+  list(id: $id) {
+    id
+    items {
+      ... on ListItemProduct {
+        id
+        quantity
+        product {
+          id
+          description
+          price
+          thumbnail
+        }
+      }
+      ... on ListItemRecipe {
+        id
+        title
+        description
+        quantity
+      }
+    }
+  }
+}
+    `;
+export type ListItemsComponentProps = Omit<ApolloReactComponents.QueryComponentOptions<ListItemsQuery, ListItemsQueryVariables>, 'query'> & ({ variables: ListItemsQueryVariables; skip?: boolean; } | { skip: boolean; });
+
+    export const ListItemsComponent = (props: ListItemsComponentProps) => (
+      <ApolloReactComponents.Query<ListItemsQuery, ListItemsQueryVariables> query={ListItemsDocument} {...props} />
+    );
+    
+export type ListItemsProps<TChildProps = {}, TDataName extends string = 'data'> = {
+      [key in TDataName]: ApolloReactHoc.DataValue<ListItemsQuery, ListItemsQueryVariables>
+    } & TChildProps;
+export function withListItems<TProps, TChildProps = {}, TDataName extends string = 'data'>(operationOptions?: ApolloReactHoc.OperationOption<
+  TProps,
+  ListItemsQuery,
+  ListItemsQueryVariables,
+  ListItemsProps<TChildProps, TDataName>>) {
+    return ApolloReactHoc.withQuery<TProps, ListItemsQuery, ListItemsQueryVariables, ListItemsProps<TChildProps, TDataName>>(ListItemsDocument, {
+      alias: 'listItems',
+      ...operationOptions
+    });
+};
+
+/**
+ * __useListItemsQuery__
+ *
+ * To run a query within a React component, call `useListItemsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useListItemsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useListItemsQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useListItemsQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<ListItemsQuery, ListItemsQueryVariables>) {
+        return ApolloReactHooks.useQuery<ListItemsQuery, ListItemsQueryVariables>(ListItemsDocument, baseOptions);
+      }
+export function useListItemsLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<ListItemsQuery, ListItemsQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<ListItemsQuery, ListItemsQueryVariables>(ListItemsDocument, baseOptions);
+        }
+export type ListItemsQueryHookResult = ReturnType<typeof useListItemsQuery>;
+export type ListItemsLazyQueryHookResult = ReturnType<typeof useListItemsLazyQuery>;
+export type ListItemsQueryResult = ApolloReactCommon.QueryResult<ListItemsQuery, ListItemsQueryVariables>;
+export const ListRemoveProductDocument = gql`
+    mutation listRemoveProduct($productId: Int!, $listId: Int!) {
+  listRemoveProduct(productId: $productId, listId: $listId) {
+    id
+    description
+  }
+}
+    `;
+export type ListRemoveProductMutationFn = ApolloReactCommon.MutationFunction<ListRemoveProductMutation, ListRemoveProductMutationVariables>;
+export type ListRemoveProductComponentProps = Omit<ApolloReactComponents.MutationComponentOptions<ListRemoveProductMutation, ListRemoveProductMutationVariables>, 'mutation'>;
+
+    export const ListRemoveProductComponent = (props: ListRemoveProductComponentProps) => (
+      <ApolloReactComponents.Mutation<ListRemoveProductMutation, ListRemoveProductMutationVariables> mutation={ListRemoveProductDocument} {...props} />
+    );
+    
+export type ListRemoveProductProps<TChildProps = {}, TDataName extends string = 'mutate'> = {
+      [key in TDataName]: ApolloReactCommon.MutationFunction<ListRemoveProductMutation, ListRemoveProductMutationVariables>
+    } & TChildProps;
+export function withListRemoveProduct<TProps, TChildProps = {}, TDataName extends string = 'mutate'>(operationOptions?: ApolloReactHoc.OperationOption<
+  TProps,
+  ListRemoveProductMutation,
+  ListRemoveProductMutationVariables,
+  ListRemoveProductProps<TChildProps, TDataName>>) {
+    return ApolloReactHoc.withMutation<TProps, ListRemoveProductMutation, ListRemoveProductMutationVariables, ListRemoveProductProps<TChildProps, TDataName>>(ListRemoveProductDocument, {
+      alias: 'listRemoveProduct',
+      ...operationOptions
+    });
+};
+
+/**
+ * __useListRemoveProductMutation__
+ *
+ * To run a mutation, you first call `useListRemoveProductMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useListRemoveProductMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [listRemoveProductMutation, { data, loading, error }] = useListRemoveProductMutation({
+ *   variables: {
+ *      productId: // value for 'productId'
+ *      listId: // value for 'listId'
+ *   },
+ * });
+ */
+export function useListRemoveProductMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<ListRemoveProductMutation, ListRemoveProductMutationVariables>) {
+        return ApolloReactHooks.useMutation<ListRemoveProductMutation, ListRemoveProductMutationVariables>(ListRemoveProductDocument, baseOptions);
+      }
+export type ListRemoveProductMutationHookResult = ReturnType<typeof useListRemoveProductMutation>;
+export type ListRemoveProductMutationResult = ApolloReactCommon.MutationResult<ListRemoveProductMutation>;
+export type ListRemoveProductMutationOptions = ApolloReactCommon.BaseMutationOptions<ListRemoveProductMutation, ListRemoveProductMutationVariables>;
+export const ListRenameDocument = gql`
+    mutation listRename($id: Int!, $description: String!) {
+  listRename(id: $id, description: $description) {
+    id
+    description
+  }
+}
+    `;
+export type ListRenameMutationFn = ApolloReactCommon.MutationFunction<ListRenameMutation, ListRenameMutationVariables>;
+export type ListRenameComponentProps = Omit<ApolloReactComponents.MutationComponentOptions<ListRenameMutation, ListRenameMutationVariables>, 'mutation'>;
+
+    export const ListRenameComponent = (props: ListRenameComponentProps) => (
+      <ApolloReactComponents.Mutation<ListRenameMutation, ListRenameMutationVariables> mutation={ListRenameDocument} {...props} />
+    );
+    
+export type ListRenameProps<TChildProps = {}, TDataName extends string = 'mutate'> = {
+      [key in TDataName]: ApolloReactCommon.MutationFunction<ListRenameMutation, ListRenameMutationVariables>
+    } & TChildProps;
+export function withListRename<TProps, TChildProps = {}, TDataName extends string = 'mutate'>(operationOptions?: ApolloReactHoc.OperationOption<
+  TProps,
+  ListRenameMutation,
+  ListRenameMutationVariables,
+  ListRenameProps<TChildProps, TDataName>>) {
+    return ApolloReactHoc.withMutation<TProps, ListRenameMutation, ListRenameMutationVariables, ListRenameProps<TChildProps, TDataName>>(ListRenameDocument, {
+      alias: 'listRename',
+      ...operationOptions
+    });
+};
+
+/**
+ * __useListRenameMutation__
+ *
+ * To run a mutation, you first call `useListRenameMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useListRenameMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [listRenameMutation, { data, loading, error }] = useListRenameMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      description: // value for 'description'
+ *   },
+ * });
+ */
+export function useListRenameMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<ListRenameMutation, ListRenameMutationVariables>) {
+        return ApolloReactHooks.useMutation<ListRenameMutation, ListRenameMutationVariables>(ListRenameDocument, baseOptions);
+      }
+export type ListRenameMutationHookResult = ReturnType<typeof useListRenameMutation>;
+export type ListRenameMutationResult = ApolloReactCommon.MutationResult<ListRenameMutation>;
+export type ListRenameMutationOptions = ApolloReactCommon.BaseMutationOptions<ListRenameMutation, ListRenameMutationVariables>;
+export const ListsDocument = gql`
+    query lists($start: Int!, $size: Int) {
+  lists(start: $start, size: $size) {
+    result {
+      ...list
+    }
+    total
+  }
+}
+    ${ListFragmentDoc}`;
+export type ListsComponentProps = Omit<ApolloReactComponents.QueryComponentOptions<ListsQuery, ListsQueryVariables>, 'query'> & ({ variables: ListsQueryVariables; skip?: boolean; } | { skip: boolean; });
+
+    export const ListsComponent = (props: ListsComponentProps) => (
+      <ApolloReactComponents.Query<ListsQuery, ListsQueryVariables> query={ListsDocument} {...props} />
+    );
+    
+export type ListsProps<TChildProps = {}, TDataName extends string = 'data'> = {
+      [key in TDataName]: ApolloReactHoc.DataValue<ListsQuery, ListsQueryVariables>
+    } & TChildProps;
+export function withLists<TProps, TChildProps = {}, TDataName extends string = 'data'>(operationOptions?: ApolloReactHoc.OperationOption<
+  TProps,
+  ListsQuery,
+  ListsQueryVariables,
+  ListsProps<TChildProps, TDataName>>) {
+    return ApolloReactHoc.withQuery<TProps, ListsQuery, ListsQueryVariables, ListsProps<TChildProps, TDataName>>(ListsDocument, {
+      alias: 'lists',
+      ...operationOptions
+    });
+};
+
+/**
+ * __useListsQuery__
+ *
+ * To run a query within a React component, call `useListsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useListsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useListsQuery({
+ *   variables: {
+ *      start: // value for 'start'
+ *      size: // value for 'size'
+ *   },
+ * });
+ */
+export function useListsQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<ListsQuery, ListsQueryVariables>) {
+        return ApolloReactHooks.useQuery<ListsQuery, ListsQueryVariables>(ListsDocument, baseOptions);
+      }
+export function useListsLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<ListsQuery, ListsQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<ListsQuery, ListsQueryVariables>(ListsDocument, baseOptions);
+        }
+export type ListsQueryHookResult = ReturnType<typeof useListsQuery>;
+export type ListsLazyQueryHookResult = ReturnType<typeof useListsLazyQuery>;
+export type ListsQueryResult = ApolloReactCommon.QueryResult<ListsQuery, ListsQueryVariables>;
+export const ProductsDocument = gql`
+    query products {
+  products {
+    id
+    price
+    thumbnail
+    description
+  }
+}
+    `;
+export type ProductsComponentProps = Omit<ApolloReactComponents.QueryComponentOptions<ProductsQuery, ProductsQueryVariables>, 'query'>;
+
+    export const ProductsComponent = (props: ProductsComponentProps) => (
+      <ApolloReactComponents.Query<ProductsQuery, ProductsQueryVariables> query={ProductsDocument} {...props} />
+    );
+    
+export type ProductsProps<TChildProps = {}, TDataName extends string = 'data'> = {
+      [key in TDataName]: ApolloReactHoc.DataValue<ProductsQuery, ProductsQueryVariables>
+    } & TChildProps;
+export function withProducts<TProps, TChildProps = {}, TDataName extends string = 'data'>(operationOptions?: ApolloReactHoc.OperationOption<
+  TProps,
+  ProductsQuery,
+  ProductsQueryVariables,
+  ProductsProps<TChildProps, TDataName>>) {
+    return ApolloReactHoc.withQuery<TProps, ProductsQuery, ProductsQueryVariables, ProductsProps<TChildProps, TDataName>>(ProductsDocument, {
+      alias: 'products',
+      ...operationOptions
+    });
+};
+
+/**
+ * __useProductsQuery__
+ *
+ * To run a query within a React component, call `useProductsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useProductsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useProductsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useProductsQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<ProductsQuery, ProductsQueryVariables>) {
+        return ApolloReactHooks.useQuery<ProductsQuery, ProductsQueryVariables>(ProductsDocument, baseOptions);
+      }
+export function useProductsLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<ProductsQuery, ProductsQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<ProductsQuery, ProductsQueryVariables>(ProductsDocument, baseOptions);
+        }
+export type ProductsQueryHookResult = ReturnType<typeof useProductsQuery>;
+export type ProductsLazyQueryHookResult = ReturnType<typeof useProductsLazyQuery>;
+export type ProductsQueryResult = ApolloReactCommon.QueryResult<ProductsQuery, ProductsQueryVariables>;
 export const SimpleDocument = gql`
     query simple {
   simple

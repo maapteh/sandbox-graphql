@@ -1,0 +1,6 @@
+mutation listRemoveProduct($productId: Int!, $listId: Int!) {
+    listRemoveProduct(productId: $productId, listId: $listId) {
+        id
+        description
+    }
+}

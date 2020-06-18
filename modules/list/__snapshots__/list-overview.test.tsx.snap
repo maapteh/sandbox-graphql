@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`lists renders when we have data 1`] = `
+<div>
+  <div
+    class="sc-AxhCb dtlpSM"
+    data-testid="list-1"
+  >
+    list-1
+    <a
+      class="sc-AxhUy cmnYOP"
+    >
+      rename
+    </a>
+    <div
+      class="sc-AxjAm dnFUoP"
+    />
+  </div>
+  <div
+    class="sc-AxhCb dtlpSM"
+    data-testid="list-2"
+  >
+    list-2
+    <a
+      class="sc-AxhUy cmnYOP"
+    >
+      rename
+    </a>
+    <div
+      class="sc-AxjAm dnFUoP"
+    />
+  </div>
+  <button>
+    Load More
+  </button>
+</div>
+`;
+
+exports[`lists shows blank without data 1`] = `
+<div>
+  <button>
+    Load More
+  </button>
+</div>
+`;
+
+exports[`lists shows error 1`] = `
+<div>
+  <p
+    data-testid="error"
+  >
+    Error 
+    {"graphQLErrors":[],"networkError":{},"message":"Network error: big error"}
+  </p>
+</div>
+`;
