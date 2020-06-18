@@ -15,7 +15,7 @@ yarn dev
 -   App: <http://localhost:3007>
 -   GraphQL Playground and API endpoint: <http://localhost:3007/api/graphql>
 
-## File structure
+## File Structure
 
 -   [GraphQL Resolver and Schema](./pages/api/graphql/index.ts)
 -   [React Pages](./pages/index.tsx)
