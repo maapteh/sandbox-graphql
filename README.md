@@ -4,7 +4,9 @@ GraphQL, TypeScript, React sandbox application and tutorial.
 
 ## Tutorial
 
-[Click here](./internals/wiki/index.md) to follow the workshop tutorial.
+[Click here](https://github.com/maapteh/sandbox-graphql/wiki) to follow the workshop tutorial through GitHub.
+
+[Click here](./internals/wiki/index.md) to see the markdown files.
 
 ## Quick Start
 
