@@ -33,7 +33,7 @@ You should already have the following:
 
 ### Fundamentals
 
-A step-by-step or standalone guide to build a GraphQL API and web application. It's possible to start at any chapter. Each chapter contains assignments that are free to implement however you'd like. As a more guided track you can follow the solutions where we build a [favorites list app](./img/favorite-lists.png).
+A step-by-step or standalone guide to build a GraphQL API and web application. It's possible to start at any chapter. Each chapter contains assignments that are free to implement however you'd like. As a more guided track you can follow the solutions where we build a favorite list app.
 
 You can also start with the projects and use the fundamentals guide as a reference. Chapter 4 is a project to build a Covid tracking application, and in the final project we build a SpaceX application.
 
